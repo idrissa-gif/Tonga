@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name ="admin_tb",uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-public class AdminLogin {
+public class LoginServlet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
