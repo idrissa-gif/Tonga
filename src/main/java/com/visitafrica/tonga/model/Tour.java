@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tour_id")
     private Integer id;
     private String tour_name ;
     private String tour_operator;
