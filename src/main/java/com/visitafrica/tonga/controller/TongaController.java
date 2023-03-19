@@ -29,7 +29,7 @@ public class TongaController {
         System.out.println(password);
         Login oauthUser = loginService.login(login.getEmail(),password);
         if(Objects.nonNull(oauthUser)){
-            return "/manage-tour";
+            return "/dashboard";
         }else {
             return "redirect:/login";
         }
