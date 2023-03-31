@@ -3,23 +3,77 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <link href="./css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-<jsp:include page="includes/sidebar.jsp"/>
-<!-- Start Welcome area -->
-<div class="all-content-wrapper">
+<div style="margin-bottom: 5%;">
+    <jsp:include page="includes/sidebar.jsp"/>
+</div>
+<div class="row">
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL COUNTRY</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-success">View Details</button>
+            </div>
+        </div>
+    </div>
 
-    <div class="white-box analytics-info-cs">
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL TOUR</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-light">View Details</button>
+            </div>
+        </div>
+    </div>
 
-        <h3 class="box-title">Total Countries</h3>
-        <ul class="list-inline two-part-sp">
-            <li>
-                <div><i class="fa fa-globe" aria-hidden="true" style="color: red"></i></div>
-            </li>
-            <li class="text-right sp-cn-r"> <span class="counter text-success" style="color: blue">(<?php echo htmlentities($totcountries); ?>)</span></li>
-            <a href="manage-countries.jsp"><STRONG> View Detail</STRONG></a>
-        </ul>
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL USERS</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-light">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL OPERATOR</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-light">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL SUGGESTION PLACES</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-light">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4" style="margin-bottom: 100px;">
+        <div class="card" style="text-align: center; margin-left: 2%">
+            <div class="card-body">
+                <h5 class="card-title">TOTAL SUGGESTION PLACES</h5>
+                <p class="card-text">(28)</p>
+                <button class="btn-light">View Details</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    <jsp:include page="includes/footer.jsp"/>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

@@ -44,4 +44,12 @@ public class TongaController {
         }
     }
 
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard(ModelAndView model)
+    {
+        model.setViewName("/dashboard");
+        return model;
+    }
+
+
 }
