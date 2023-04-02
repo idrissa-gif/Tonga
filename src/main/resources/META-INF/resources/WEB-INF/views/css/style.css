@@ -26,3 +26,7 @@
 .card:hover .card-back {
     transform: rotateY(0deg);
 }
+#addbtn{
+    padding-left: 30% ;
+    margin-left: 30%;
+}

@@ -20,8 +20,8 @@
                             Tour
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Add</a></li>
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item" href="/add-tour">Add</a></li>
+                            <li><a class="dropdown-item" href="/manage-tour">Manage</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -30,7 +30,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Add</a></li>
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item" href="#">Manage</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -39,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Add</a></li>
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item" href="#">Manage</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
