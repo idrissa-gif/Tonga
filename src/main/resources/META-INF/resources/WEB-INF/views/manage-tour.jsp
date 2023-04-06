@@ -44,7 +44,7 @@
         <td >${tour.image1}</td>
         <td >${tour.image2}</td>
         <td >${tour.image1}</td>
-        <td ><a type="btn" href="edit-tour-detail">Edit</a>  <a href="#">Delete</a></td>
+        <td ><a type="btn" href="@{/edit-tour-detail}">Edit</a>  <a href="#">Delete</a></td>
     </tr>
     </c:forEach>
     </tbody>

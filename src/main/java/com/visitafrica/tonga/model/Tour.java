@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "tour_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "tour_id"))
 public class Tour {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tour_id")
     private Integer id;
     private String tour_name ;
