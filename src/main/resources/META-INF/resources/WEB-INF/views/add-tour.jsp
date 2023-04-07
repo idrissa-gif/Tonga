@@ -10,6 +10,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="includes/sidebar.jsp"/>
 </div>
+<h2 style="text-align: center">Add New Tour</h2>
 <form id="addTourForm" method="post" th:th:action="@{/add-tour}">
     <div class="form-group">
         <input type="text" class="form-control" id="tour_name" name = "tour_name" aria-describedby="Tour title" placeholder="Enter Tour name">

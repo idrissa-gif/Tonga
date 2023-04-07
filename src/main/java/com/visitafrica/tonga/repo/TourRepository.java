@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface TourDao extends JpaRepository<Tour,Long> {
+public interface TourRepository extends JpaRepository<Tour,Long> {
     List<Tour> findAllBy();
+    public void deleteById(int id);
 }

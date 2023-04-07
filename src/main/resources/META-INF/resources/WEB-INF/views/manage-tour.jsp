@@ -33,6 +33,7 @@
     <c:set var="count" value="0" />
     <c:forEach items="${tours}" var="tour">
     <tr>
+
         <c:set var="count" value="${count + 1}" />
         <th scope="row">${count}</th>
         <th >${tour.tour_name}</th>
@@ -44,7 +45,7 @@
         <td >${tour.image1}</td>
         <td >${tour.image2}</td>
         <td >${tour.image1}</td>
-        <td ><a type="btn" href="@{/edit-tour-detail}">Edit</a>  <a href="#">Delete</a></td>
+        <td ><a type="btn" href="@{/edit-tour-detail}">Edit</a>  <a class="btn btn-light" href="/delete-tour?tour_id=${tour.id}">Delete</a></td>
     </tr>
     </c:forEach>
     </tbody>

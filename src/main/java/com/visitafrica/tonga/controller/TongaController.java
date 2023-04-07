@@ -44,10 +44,17 @@ public class TongaController {
         return "/add-tour";
     }
 
+
     @PostMapping("/add-tour")
     public String addTour(@ModelAttribute("tour") Tour tour) {
         tourService.saveTour(tour);
         return "/add-tour";
+    }
+    @GetMapping("/delete-tour")
+    public String RemoveTour(@RequestParam("tour_id") int tour_id,Model model)
+    {
+        tourService.Delete(tour_id);
+        return editTourDetail(model);
     }
 
     @GetMapping("/manage-tour")
