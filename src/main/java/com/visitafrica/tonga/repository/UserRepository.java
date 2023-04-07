@@ -1,4 +1,4 @@
-package com.visitafrica.tonga.repo;
+package com.visitafrica.tonga.repository;
 
 
 import com.visitafrica.tonga.model.User;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    public User findByUsername(String username);
+    User findByUsername(String username);
 
 }

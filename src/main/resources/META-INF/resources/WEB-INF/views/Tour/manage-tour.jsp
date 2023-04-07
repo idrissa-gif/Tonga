@@ -9,7 +9,7 @@
 </head>
 <body>
 <div style="margin-bottom: 5%;">
-    <jsp:include page="includes/sidebar.jsp"/>
+    <jsp:include page="../includes/sidebar.jsp"/>
 </div>
 
 <h1 style="text-align: center">Tour Details</h1>

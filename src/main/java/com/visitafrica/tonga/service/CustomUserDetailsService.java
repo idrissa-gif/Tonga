@@ -1,8 +1,8 @@
-package com.visitafrica.tonga.services;
+package com.visitafrica.tonga.service;
 
 
 import com.visitafrica.tonga.model.User;
-import com.visitafrica.tonga.repo.UserRepository;
+import com.visitafrica.tonga.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

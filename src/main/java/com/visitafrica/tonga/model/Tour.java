@@ -1,6 +1,10 @@
 package com.visitafrica.tonga.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tour_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "tour_id"))
@@ -18,6 +22,7 @@ public class Tour {
     private String image1;
     private String image2;
     private String image3;
+
 
     public Integer getId() {
         return id;
@@ -98,4 +103,5 @@ public class Tour {
     public void setImage3(String image3) {
         this.image3 = image3;
     }
+
 }

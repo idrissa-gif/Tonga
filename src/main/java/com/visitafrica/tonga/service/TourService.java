@@ -1,7 +1,7 @@
-package com.visitafrica.tonga.services;
+package com.visitafrica.tonga.service;
 
 import com.visitafrica.tonga.model.Tour;
-import com.visitafrica.tonga.repo.TourRepository;
+import com.visitafrica.tonga.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,6 @@ public class TourService {
     {
         return tourRepository.findAll();
     }
-    public void Delete(int tour_id){tourRepository.deleteById(tour_id);}
+    public void Delete(Tour tour){tourRepository.delete(tour);}
 }
 

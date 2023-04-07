@@ -1,4 +1,4 @@
-package com.visitafrica.tonga.repo;
+package com.visitafrica.tonga.repository;
 
 import com.visitafrica.tonga.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

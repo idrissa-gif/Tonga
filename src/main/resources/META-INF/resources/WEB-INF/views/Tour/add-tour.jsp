@@ -3,15 +3,15 @@
 <html>
 <head>
     <title>Dashboard</title>
-    <link href="../../../../css/style.css" rel="stylesheet">
+    <link href="../../../../../css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
 <div style="margin-bottom: 5%;">
-    <jsp:include page="includes/sidebar.jsp"/>
+    <jsp:include page="../includes/sidebar.jsp"/>
 </div>
 <h2 style="text-align: center">Add New Tour</h2>
-<form id="addTourForm" method="post" th:th:action="@{/add-tour}">
+<form method="post" action="/add-tour">
     <div class="form-group">
         <input type="text" class="form-control" id="tour_name" name = "tour_name" aria-describedby="Tour title" placeholder="Enter Tour name">
         <br>
@@ -56,7 +56,7 @@
     <button type="submit" class="btn btn-outline-primary" style="margin-left: 50%;">Add</button>
 </form>
 <div>
-    <jsp:include page="includes/footer.jsp"/>
+    <jsp:include page="../includes/footer.jsp"/>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
