@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid; // Import the Valid annotation
+import com.visitafrica.tonga.model.Operator;
+import com.visitafrica.tonga.service.OperatorService;
 import java.util.List;
 
 
@@ -23,6 +25,9 @@ public class TongaController {
 
     @Autowired
     private TourService tourService;
+
+    @Autowired
+    private OperatorService operatorService;
 
 
     @GetMapping("/login")
@@ -59,10 +64,10 @@ public class TongaController {
     public String addCountry(@Valid @ModelAttribute("country") Country country,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("message", " Failed to add Country!");
             return "/Country/add-country"; // Return back to the form if validation fails
         }
 
-        System.out.println(country.getName());
         countryService.addCountry(country); // Call the service to add the country to the database
 
         model.addAttribute("message", "Country added successfully!"); // Add success message to model
@@ -76,30 +81,64 @@ public class TongaController {
         return "/Country/manage-country";
     }
 
-    @DeleteMapping("/deleteCountry/{id}")
+    @GetMapping("/deleteCountry/{id}")
     public String deleteCountry(@PathVariable("id") Long id) {
-        // Code to delete the country with the given ID
-        // You can use a service or repository to handle the deletion logic
         countryService.deleteCountryById(id);
-        return "redirect:/countryList"; // Redirect to the country list page after deletion
+
+        return "redirect:/manage-country"; // Redirect to the country list page after deletion
     }
 
     /** END OF COUNTRY FUNCTIONS **/
+    /** START OF OPERATOR FUNCTIONS **/
+    @RequestMapping("/addOperator")
+    public String addOperatorForm() {
+        return "/Operator/add-operator"; // Return the name of the JSP form file
+    }
+
+    @GetMapping("/saveOperator")
+    public String saveOperator(Operator operator,Model model,BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", " Failed to add Country!");
+            return "/Operator/add-operator"; // Return back to the form if validation fails
+        }
+        operatorService.saveOperator(operator); // Call the service to save the Operator object
+
+        model.addAttribute("message", "Operator added successfully!"); // Add success message to model
+        return "Operator/add-operator"; // Redirect to the addOperator form after saving
+    }
+
+    @GetMapping("/manage-operator")
+    public String manageOperator(Model model)
+    {
+        List<Operator> operatorList = operatorService.findOperators();
+        model.addAttribute("operators", operatorList);
+        return "/Operator/manage-operator";
+    }
+
+
+    /** END OF OPERATOR FUNCTIONS **/
 
     /**START OF TOUR FUNCTIONS**/
-    @GetMapping("/add-tour")
-    public String showAddTour(Model model) {
-        model.addAttribute("tour", new Tour());
+    @RequestMapping("/showaddform")
+
+    public String showTourForm() {
         return "/Tour/add-tour";
     }
 
-
-    @PostMapping("/add-tour")
-    public String addTour(@ModelAttribute("tour") Tour tour) {
+    @GetMapping("/addTour")
+    public String addTour(Tour tour,BindingResult bindingResult,Model model) {
         tourService.saveTour(tour);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", " Failed to add Tour!");
+            return "/Tour/add-tour"; // Return back to the form if validation fails
+        }
+        tourService.saveTour(tour); // Call the service to save the Tour object
+
+        model.addAttribute("message", "Tour added successfully!"); // Add success message to model
         return "/Tour/add-tour";
     }
-    @GetMapping("/delete-tour")
+    @GetMapping("/deleteTour")
     public String RemoveTour(@RequestParam("tour_id")int tour_id,Model model)
     {
         List<Tour> tourList = tourService.findTour();
