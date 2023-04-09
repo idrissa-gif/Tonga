@@ -1,7 +1,9 @@
 package com.visitafrica.tonga.controller;
 
 import com.visitafrica.tonga.model.Country;
+import com.visitafrica.tonga.model.Review;
 import com.visitafrica.tonga.model.Tour;
+import com.visitafrica.tonga.service.ReviewService;
 import com.visitafrica.tonga.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ public class TongaController {
     @Autowired
     private OperatorService operatorService;
 
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
@@ -162,5 +166,14 @@ public class TongaController {
     }
 
     /** END OF COUNTRY FUNCTIONS **/
+
+    /** START OF REVIEW FUNCTIONS **/
+    @GetMapping("/reviews")
+    public String displayReviews(Model model) {
+        List<Review> reviews = reviewService.getAllReviews();
+        model.addAttribute("reviews", reviews);
+        return "reviews";
+    }
+    /** END OF REVIEW FUNCTIONS **/
 }
 

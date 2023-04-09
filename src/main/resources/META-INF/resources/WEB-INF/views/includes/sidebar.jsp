@@ -47,7 +47,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Review</a>
+                        <a class="nav-link" aria-current="page" href="/reviews">Review</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" aria-current="page" href="#">Log Out</a>
