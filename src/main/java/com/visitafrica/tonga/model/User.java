@@ -1,53 +1,33 @@
 package com.visitafrica.tonga.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "user_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "user_email"))
-
+@Table(name = "user_tb")
 public class User {
+    private Long user_id;
+    private String username;
+    private String password;
+    private String passwordConfirm;
+    private Set < Role > roles;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_name")
-    private String name ;
-    @Column(name = "user_email")
-    private String email;
-    @Column(name = "phone")
-    private String phone ;
-    @Column(name = "address")
-    private  String address ;
-    @Column(name = "password")
-    private  String password ;
-    public String getName() {
-        return name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_id(Long id) {
+        this.user_id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -58,4 +38,22 @@ public class User {
         this.password = password;
     }
 
+    @Transient
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "user_role_tb", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    public Set < Role > getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set < Role > roles) {
+        this.roles = roles;
+    }
 }

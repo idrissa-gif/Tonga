@@ -3,18 +3,31 @@ package com.visitafrica.tonga.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "country_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "country_name"))
+@Table(name = "country_tb")
 public class Country {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @Column(name = "country_name")
+
     private String name ;
 
     @Column (name = "country_tours")
     private Integer tours;
 
-    @Column(name = "country_operator")
+    @Column(name = "country_operators")
     private Integer operators;
+
+    private String image;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -40,5 +53,11 @@ public class Country {
         this.operators = operators;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
