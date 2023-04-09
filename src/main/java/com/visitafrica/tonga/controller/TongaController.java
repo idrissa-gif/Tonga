@@ -92,7 +92,28 @@ public class TongaController {
         return "redirect:/manage-country"; // Redirect to the country list page after deletion
     }
 
+    @GetMapping("/editCountry/{id}")
+    public String editCountry(@PathVariable("id") Long countryId, Model model) {
+        // Retrieve the country information by ID from the service
+        Country country = countryService.getCountryById(countryId);
+
+        // Add the country object to the model to be passed to the view
+        model.addAttribute("country", country);
+
+        // Return the view name for the edit country page
+        return "/Country/edit-country";
+    }
+    @GetMapping("/updateCountry")
+    public String updateCountry(@ModelAttribute("country") Country country, Model model) {
+        // Call the service to update the country in the database
+        countryService.updateCountry(country);
+
+        model.addAttribute("message", "Country updated successfully!"); // Add success message to model
+        return "/Country/edit-country"; // Return to a success page
+    }
+
     /** END OF COUNTRY FUNCTIONS **/
+
     /** START OF OPERATOR FUNCTIONS **/
     @RequestMapping("/addOperator")
     public String addOperatorForm() {
@@ -164,8 +185,10 @@ public class TongaController {
         model.addAttribute("tours", tours);
         return "/Tour/manage-tour";
     }
+    /** END OF TOUR FUNCTIONS **/
 
-    /** END OF COUNTRY FUNCTIONS **/
+
+
 
     /** START OF REVIEW FUNCTIONS **/
     @GetMapping("/reviews")
