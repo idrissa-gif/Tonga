@@ -32,13 +32,14 @@
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
       <span>${message}</span>
-      <input name="username" type="text" class="form-control" placeholder="Username"
+      <input name="email" type="email" class="form-control" placeholder="Email"
              autofocus="true"/>
       <input name="password" type="password" class="form-control" placeholder="Password"/>
       <span>${error}</span>
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+      <a class="btn btn-lg btn-primary btn-block" href="/registration" >Sign Up</a>
     </div>
   </form>
 </div>

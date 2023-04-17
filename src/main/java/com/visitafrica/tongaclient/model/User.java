@@ -10,7 +10,8 @@ public class User {
     private Long user_id;
     private String username;
     private String fullName;
-    private String user_email;
+
+    private String email;
     private String password;
     private String passwordConfirm;
     private String phone ;
@@ -51,12 +52,12 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getUser_email() {
-        return user_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {
