@@ -15,42 +15,17 @@
     <title>Home Page</title>
     <!-- Add Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <!-- Logo Image -->
-        <img src="/images/logo/TONGA.png" alt="Logo" width="50" height="50">
-    </a>
-    <!-- Toggle button for small screens -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar items -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Tour</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Destination</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Sign In</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="container mt-5">
-    <h1>Welcome to Our Website</h1>
-    <p>Explore the best tours and destinations in Africa!</p>
+<jsp:include page="header.jsp"/>
+<div class="banner">
+    <h1 class="text-center">Tonga Welcomes you to Africa</h1>
+    <p class="text-center">Your ultimate guide to exploring the stunning continent of Africa. Our mission is to help you discover the best of Africa's natural beauty, diverse cultures, and unforgettable experiences. From majestic safaris to breathtaking landscapes, we provide expert recommendations and insider tips to help you plan your perfect African adventure. Join us as we explore the wonders of Africa and create memories that will last a lifetime.</p>
 </div>
+
 <!-- Tour section -->
 <section class="bg-light py-5">
     <div class="container">
@@ -58,26 +33,38 @@
             <c:forEach var="tour" items="${tourList}">
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="${tour.image1}" alt="${tour.tour_name}" class="card-img-top">
+                        <img src="/images/${tour.image1}" alt="${tour.tour_name}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">${tour.tour_name}</h5>
                             <p class="card-text"><strong>Operator:</strong> ${tour.tour_operator}</p>
                             <p class="card-text"><strong>Countries:</strong> ${tour.countries}</p>
-                            <p class="card-text"><strong>Price:</strong> ${tour.prices}</p>
+                            <p class="card-text"><strong>Price:</strong> ${tour.prices} $</p>
                             <p class="card-text"><strong>No. of Persons:</strong> ${tour.number_person}</p>
-                            <p class="card-text"><strong>Rate:</strong> ${tour.rate}</p>
+                            <p class="card-text">
+                                <c:forEach var="i" begin="1" end="${tour.rate}">
+                                    <span class="fa fa-star" aria-hidden="true" style="color: gold;"></span>
+                                </c:forEach>
+                            </p>
+                            <div class="text-center">
+                                <a href="/DetailTourView" class="btn btn-primary btn-sm">More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </c:forEach>
+
         </div>
     </div>
 </section>
 </div>
+<jsp:include page="footer.jsp"/>
 <!-- Add Bootstrap and jQuery scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/resources/fontawesome/js/all.min.js"></script>
+
 </body>
 
 </html>

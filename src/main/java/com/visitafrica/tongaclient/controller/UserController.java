@@ -1,6 +1,10 @@
 package com.visitafrica.tongaclient.controller;
 
+import com.visitafrica.tongaclient.model.Country;
 import com.visitafrica.tongaclient.model.User;
+import com.visitafrica.tongaclient.model.Tour;
+import com.visitafrica.tongaclient.service.CountryService;
+import com.visitafrica.tongaclient.service.TourService;
 import com.visitafrica.tongaclient.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,11 +14,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
+    private CountryService countryService;
+    @Autowired
     private UserService userService;
+    @Autowired
+    private TourService tourService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -32,13 +41,17 @@ public class UserController {
     @PostMapping("/login")
 
     public String signin(Model model) {
-        return "dashboard";
+        List<Tour>  tourList = tourService.findTour();
+        model.addAttribute("tourList",tourList);
+        return "home";
     }
 
     @GetMapping({"/","/welcome"})
     public String welcome(Model model)
     {
-        return "dashboard";
+        List<Tour>  tourList = tourService.findTour();
+        model.addAttribute("tourList",tourList);
+        return "home";
     }
 
 
@@ -75,6 +88,17 @@ public class UserController {
         // Redirect to login page after successful registration
         return "redirect:/login";
     }
+    @GetMapping("/country")
 
+    public String getCountries(Model model) {
+        List<Country> countryList = countryService.findCountries(); // Replace with your actual service method to retrieve countries
+        model.addAttribute("countryList", countryList);
+        return "country"; // Replace with the name of the view that displays the list of countries
+    }
+    @GetMapping("/DetailTourView")
+    public String getDetailTourView(Model model)
+    {
+        return "tourDetailView";
+    }
 }
 
