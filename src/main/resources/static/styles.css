@@ -2,3 +2,20 @@
     color: #0ab8e0; /* Update with your desired color */
     /* Add other styles as needed */
 }
+
+/*for the review stars*/
+.stars {
+    cursor: pointer;
+}
+
+.star {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #f8c947; /* Replace with your desired color for unselected stars */
+}
+
+.star:hover,
+.star.active {
+    background-color: #ffd700; /* Replace with your desired color for selected stars */
+}

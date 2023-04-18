@@ -16,7 +16,7 @@
 <body>
 <div class="container mt-5">
     <h1>User Registration</h1>
-    <form action="/register" method="get" class="needs-validation">
+    <form action="/register" method="post" class="needs-validation">
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" class="form-control" required>
@@ -70,7 +70,9 @@
         <input type="submit" value="Register" class="btn btn-primary">
     </form>
 </div>
-
+<div>
+    <p>${errorMessage}</p>
+</div>
 <!-- Add Bootstrap JS link here for form validation -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

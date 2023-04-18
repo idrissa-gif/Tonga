@@ -25,7 +25,6 @@
     <h1 class="text-center">Tonga Welcomes you to Africa</h1>
     <p class="text-center">Your ultimate guide to exploring the stunning continent of Africa. Our mission is to help you discover the best of Africa's natural beauty, diverse cultures, and unforgettable experiences. From majestic safaris to breathtaking landscapes, we provide expert recommendations and insider tips to help you plan your perfect African adventure. Join us as we explore the wonders of Africa and create memories that will last a lifetime.</p>
 </div>
-
 <!-- Tour section -->
 <section class="bg-light py-5">
     <div class="container">
@@ -33,9 +32,11 @@
             <c:forEach var="tour" items="${tourList}">
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="/images/${tour.image1}" alt="${tour.tour_name}" class="card-img-top">
+                        <div style="position: relative;">
+                            <img src="/images/${tour.image1}" alt="${tour.tour_name}" class="card-img-top">
+                            <h5 class="card-title" style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 10px; background-color: rgba(0,0,0,0.7); color: #fff; padding: 10px; text-align: center; z-index: 1;">${tour.tour_name}</h5>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">${tour.tour_name}</h5>
                             <p class="card-text"><strong>Operator:</strong> ${tour.tour_operator}</p>
                             <p class="card-text"><strong>Countries:</strong> ${tour.countries}</p>
                             <p class="card-text"><strong>Price:</strong> ${tour.prices} $</p>
@@ -46,7 +47,7 @@
                                 </c:forEach>
                             </p>
                             <div class="text-center">
-                                <a href="/DetailTourView" class="btn btn-primary btn-sm">More</a>
+                                <a href="/DetailTourView/${tour.id}" class="btn btn-primary btn-sm">More</a>
                             </div>
                         </div>
                     </div>
@@ -56,8 +57,11 @@
 
         </div>
     </div>
+
 </section>
+
 </div>
+
 <jsp:include page="footer.jsp"/>
 <!-- Add Bootstrap and jQuery scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

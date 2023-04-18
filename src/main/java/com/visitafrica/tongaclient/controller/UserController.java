@@ -1,20 +1,21 @@
 package com.visitafrica.tongaclient.controller;
 
-import com.visitafrica.tongaclient.model.Country;
-import com.visitafrica.tongaclient.model.User;
-import com.visitafrica.tongaclient.model.Tour;
-import com.visitafrica.tongaclient.service.CountryService;
-import com.visitafrica.tongaclient.service.TourService;
-import com.visitafrica.tongaclient.service.UserService;
+import com.visitafrica.tongaclient.model.*;
+import com.visitafrica.tongaclient.security.OptionalLogin;
+import com.visitafrica.tongaclient.security.OptionalLoginInterceptor;
+import com.visitafrica.tongaclient.service.*;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -24,39 +25,58 @@ public class UserController {
     private UserService userService;
     @Autowired
     private TourService tourService;
-
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private OperatorService operatorService;
+    @Autowired
+    private HttpSession session;
+    @Autowired
+    private OptionalLoginInterceptor optionalLoginInterceptor;
+    @Autowired
+    private ReviewService reviewService;
+
+    @GetMapping("/map")
+    public String map() {
+        return "maptest";
+    }
+
     @GetMapping("/index")
-    public String home(){
+    public String home() {
         return "login";
     }
 
     @GetMapping("/login")
-    public String login()
-    {
+    public String login() {
         return "login";
     }
 
     @PostMapping("/login")
+    public String signin(Model model,
+                         @RequestParam("email") String email,
+                         @RequestParam("password") String password) {
 
-    public String signin(Model model) {
-        List<Tour>  tourList = tourService.findTour();
-        model.addAttribute("tourList",tourList);
-        return "home";
+        if (email.equals(userService.getbyEmail(email).getEmail()) && BCrypt.checkpw(password, userService.getbyEmail(email).getPassword())) {
+            optionalLoginInterceptor.addPermittedPath("/reviewtour");
+            model.addAttribute("user_email", email);
+            List<Tour> tourList = tourService.findTours();
+            model.addAttribute("tourList", tourList);
+            return "home";
+        } else {
+            model.addAttribute("message", "Invalid email or password");
+            return "login";
+        }
     }
 
-    @GetMapping({"/","/welcome"})
-    public String welcome(Model model)
-    {
-        List<Tour>  tourList = tourService.findTour();
-        model.addAttribute("tourList",tourList);
+
+    @GetMapping({"/", "/welcome"})
+    public String welcome(Model model) {
+        List<Tour> tourList = tourService.findTours();
+        model.addAttribute("tourList", tourList);
         return "home";
     }
 
 
     @GetMapping("/registration")
-    public String showRegistrationForm(Model model){
+    public String showRegistrationForm(Model model) {
         // create model object to store form data
         User user = new User();
         model.addAttribute("user", user);
@@ -64,8 +84,8 @@ public class UserController {
     }
 
     // Register a new user
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "registration"; // Return to registration page if validation fails
         }
@@ -77,17 +97,18 @@ public class UserController {
         }
 
         // Encrypt the password before saving
-        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        String encryptedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(encryptedPassword);
+
 
         // Save the user to the database
         userService.saveUser(user);
-        System.out.println(user.getEmail()+ " " +user.getAddress());
-        System.out.println(user);
+
 
         // Redirect to login page after successful registration
         return "redirect:/login";
     }
+
     @GetMapping("/country")
 
     public String getCountries(Model model) {
@@ -95,10 +116,49 @@ public class UserController {
         model.addAttribute("countryList", countryList);
         return "country"; // Replace with the name of the view that displays the list of countries
     }
-    @GetMapping("/DetailTourView")
-    public String getDetailTourView(Model model)
-    {
-        return "tourDetailView";
-    }
-}
 
+    @GetMapping("/DetailTourView/{id}")
+    public String getDetailTourView(Model model, @PathVariable("id") Long id) {
+        Optional<Tour> tour= tourService.findTour(id);
+        model.addAttribute("tour", tour.get());
+
+        Operator operator = operatorService.findByName(tour.get().getTour_operator());
+        model.addAttribute("operator",operator);
+
+        return "exploretour";
+    }
+
+    @OptionalLogin
+    @GetMapping("/reviewtour")
+    public String reviewSave(@RequestParam("rating_data") int ratingData,
+                             @RequestParam("user_email") String userEmail,
+                             @RequestParam("user_review") String userReview,
+                             @RequestParam("target") String target,
+                             HttpServletRequest request) throws Exception {
+
+        // Access the 'target' parameter value
+        System.out.println("Target: " + target);
+
+        // Add your business logic here, e.g., create a Review object and save/update it
+         User user = userService.getbyEmail(userEmail);
+         Review review = new Review();
+         review.setRate(ratingData);
+         review.setReviewer_name(user.getUsername());
+         review.setMessage(userReview);
+         review.setTarget(target);
+         reviewService.saveReview(review);
+
+        // Add any additional logic for sending updates, if needed
+        return "/login";
+    }
+
+    @GetMapping("/explorecountry/{id}")
+    public String exploirecountry()
+    {
+
+        return "explorecountry";
+    }
+
+
+
+}

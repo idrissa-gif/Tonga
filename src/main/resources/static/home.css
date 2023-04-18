@@ -1,20 +1,71 @@
-.banner {
-    background-image: url('banner-background.jpg');
-    background-size: cover;
+/* Center the container */
+.container {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+/* Style the form */
+.form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Style the form heading */
+.form-heading {
+    margin-bottom: 30px;
     text-align: center;
-    padding: 100px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Style the form inputs */
+.form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Style the form buttons */
+.btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+/* Style the primary button */
+.btn-primary {
+    background-color: #ff7e5f;
     color: #fff;
 }
 
-.banner h1 {
-    font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 30px;
-
+/* Style the secondary button */
+.btn-secondary {
+    background-color: #feb47b;
+    color: #fff;
 }
 
-.banner p {
-    font-size: 20px;
-    line-height: 30px;
-    margin-bottom: 50px;
+/* Style the error message */
+.has-error span {
+    color: #dc3545;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
 }

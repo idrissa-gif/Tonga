@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Operator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "operator_name")
     private String name;
 
@@ -22,11 +22,22 @@ public class Operator {
 
     private String image;
 
-    public int getId() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,4 +80,6 @@ public class Operator {
     public void setImage(String image) {
         this.image = image;
     }
+
+
 }

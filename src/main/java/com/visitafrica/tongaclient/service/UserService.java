@@ -3,10 +3,7 @@ package com.visitafrica.tongaclient.service;
 import com.visitafrica.tongaclient.model.User;
 import com.visitafrica.tongaclient.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {
@@ -25,5 +22,11 @@ public class UserService {
     {
         userRepository.save(user);
     }
+
+    public User getbyEmail(String email)
+    {
+        return userRepository.findByEmail(email);
+    }
+
 
 }

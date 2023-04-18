@@ -6,14 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TourService {
     @Autowired
     private TourRepository tourRepository;
-    public List<Tour> findTour()
+    public List<Tour> findTours()
     {
         return tourRepository.findAll();
+    }
+    public Optional<Tour> findTour(Long id)
+    {
+        return tourRepository.findById(id);
     }
 
 }
