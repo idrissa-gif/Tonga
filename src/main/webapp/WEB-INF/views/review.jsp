@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-sm-4 text-center">
           <h1 class="text-warning mt-4 mb-4">
-            <b><span id="average_rating"><?php echo $row['rate'] ?></span> / 5</b>
+            <b><span id="average_rating"></span> / 5</b>
           </h1>
           <div class="mb-3">
             <i class="fas fa-star star-light mr-1 main_star"></i>
@@ -40,7 +40,7 @@
             <i class="fas fa-star star-light mr-1 main_star"></i>
             <i class="fas fa-star star-light mr-1 main_star"></i>
           </div>
-          <h3><span id="total_review"><?php ?></span> Review</h3>
+          <h3><span id="total_review"></span> Review</h3>
         </div>
         <div class="col-sm-4">
           <p>
@@ -110,10 +110,13 @@
               <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
             </h4>
             <div class="form-group">
-              <input type="text" name="target" id="target" class="form-control" value="<%=tourName%>" hidden="hidden"/>
+              <input type="text" name="target" id="target" class="form-control" value="<%=tourName%>" />
             </div>
             <div class="form-group">
-              <input type="email" name="user_email" id="user_email" class="form-control" placeholder="Enter Your Email" value="<%=userEmail%>" hidden="hidden" />
+              <input type="text" name="user_name" id="user_name" class="form-control" value="<%=tourName%>" />
+            </div>
+            <div class="form-group">
+              <input type="email" name="user_email" id="user_email" class="form-control" placeholder="Enter Your Email" value="<%=userEmail%>"  />
             </div>
             <div class="form-group">
               <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
@@ -186,53 +189,51 @@
     });
 
     $('#save_review').click(function() {
-
-      var user_email = "ashfsdf";
-
+      var user_name = $('#user_name').val();
+      var user_email = $('#user_email').val();
       var user_review = $('#user_review').val();
 
-      if (user_review == '') {
-        alert("Please Fill Field");
+      if (user_name == '' || user_review == '') {
+        alert("Please Fill Both Field");
         return false;
       } else {
         $.ajax({
-          url: "/reviewtour",
-          method: "GET",
+          url: "/submit_rating", // Update the URL to the appropriate endpoint
+          method: "POST",
           data: {
             rating_data: rating_data,
+            user_name: user_name,
             user_email: user_email,
             user_review: user_review,
             target: target
           },
           success: function(data) {
-            $('#review_modal').clear();
             $('#review_modal').modal('hide');
-
             load_rating_data();
-
             alert("Thanks for your valuable review !!!");
-
+          },
+          error: function(error) {
+            console.log(error);
           }
         })
       }
-      document.getElementById("user_email").value="";
-      document.getElementById("user_review").value="";
-
-
+      document.getElementById("user_name").value = "";
+      document.getElementById("user_email").value = "";
+      document.getElementById("user_review").value = "";
     });
 
+
     load_rating_data();
+
 
     function load_rating_data() {
 
       $.ajax({
-        url: "",
-        method: "GET",
+        url: "/get_rating_data",
+        method: "POST",
         data: {
-          action: 'load_data',
           target: target
         },
-        dataType: "JSON",
         success: function(data) {
           $('#average_rating').text(data.average_rating);
           $('#total_review').text(data.total_review);
@@ -312,6 +313,9 @@
 
             $('#review_content').html(html);
           }
+        },
+        error: function(error) {
+          console.log(error);
         }
       })
     }

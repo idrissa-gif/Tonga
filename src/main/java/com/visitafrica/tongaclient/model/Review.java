@@ -17,6 +17,16 @@ public class Review {
     private String target;
     @Column(name="rate")
     private Integer rate ;
+    private long time;
+
+    public Review(){}
+    public Review(String reviewer_name, String message, String target, Integer rate,long time) {
+        this.reviewer_name = reviewer_name;
+        this.message = message;
+        this.target = target;
+        this.rate = rate;
+        this.time = time;
+    }
 
     public Integer getId() {
         return id;
@@ -56,5 +66,13 @@ public class Review {
 
     public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

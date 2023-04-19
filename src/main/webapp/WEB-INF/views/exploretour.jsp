@@ -1,13 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Tour Detail</title>
     <!-- Include Bootstrap CSS and JS -->
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
@@ -92,6 +89,10 @@
                 </li>
                 <li class="nav-item">
                     <a href="#offeredby" class="nav-link" id="offeredby-tab" data-toggle="tab">Offered By</a>
+                </li>
+                <!-- Add a new tab for Booking -->
+                <li class="nav-item">
+                    <a href="#booking" class="nav-link" id="booking-tab" data-toggle="tab">Booking</a>
                 </li>
 
             </ul>
@@ -285,6 +286,69 @@
                     </p>
 
                 </div>
+                <!-- Add the Booking tab content -->
+                <div class="tab-pane fade" id="booking">
+                    <h2>Book Tour</h2>
+                    <form action="/bookTour/${tour.id}" method="post" id="booking-form">
+                        <div class="form-group">
+                            <label for="full_name">Name</label>
+                            <input name="full_name" id="full_name" class="form-control" placeholder="Enter your name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input name="email" id="email" class="form-control" placeholder="Enter your email" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input name="phone" id="phone" class="form-control" placeholder="Enter your phone number" />
+                        </div>
+                        <div class="form-group">
+                            <label for="adults">Number of People</label>
+                            <input name="adults" id="adults" class="form-control" placeholder="Enter number of adults" />
+                        </div>
+                        <div class="form-group">
+                            <label for="children">Number of Children</label>
+                            <input name="children" id="children" class="form-control" placeholder="Enter number of children" />
+                        </div>
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input name="destination" id="destination" class="form-control" value="${tour.tour_name}" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="start_date">Date</label>
+                            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="Enter date of tour" min="${java.time.LocalDate.now()}" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Now</button>
+                    </form>
+                </div>
+
+                <!-- Booking Confirmation Modal -->
+                <div class="modal fade" id="bookingConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="bookingConfirmationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="bookingConfirmationModalLabel">Booking Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="booking-destination">Destination: </p>
+                                <p id="booking-start-date">Start Date: </p>
+                                <p id="booking-full-name">Full Name: </p>
+                                <p id="booking-email">Email: </p>
+                                <p id="booking-phone">Phone: </p>
+                                <p id="booking-adults">Adults: </p>
+                                <p id="booking-children">Children: </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -310,13 +374,62 @@
 </div>
 
 <jsp:include page="footer.jsp"/>
-<script src = "script.js"/>
+<script src = "/script.js"/>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- Add Bootstrap and jQuery JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Add custom JS for sliding stars -->
+<!-- Include jQuery and Bootstrap JS files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#booking-form').submit(function(event) {
+            // Prevent the form from submitting normally
+            event.preventDefault();
+
+            // Get the form data
+            var formData = $(this).serialize();
+
+            // Submit the form data using AJAX
+            $.ajax({
+                url: '/bookTour/${tour.id}',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                        // Set the booking information in the modal
+                        $('#booking-destination').text('Destination: ' + response.destination);
+                        $('#booking-start-date').text('Start Date: ' + response.start_date);
+                        $('#booking-full-name').text('Full Name: ' + response.full_name);
+                        $('#booking-email').text('Email: ' + response.email);
+                        $('#booking-phone').text('Phone: ' + response.phone);
+                        $('#booking-adults').text('Adults: ' + response.adults);
+                        $('#booking-children').text('Children: ' + response.children);
+
+                        // Display the booking confirmation modal
+                        $('#bookingConfirmationModal').modal('show');
+                        // Set the input field values to empty string
+                        $('#full_name').val('');
+                        $('#email').val('');
+                        $('#phone').val('');
+                        $('#adults').val('');
+                        $('#children').val('');
+                        $('#start_date').val('');
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
 
 </body>
 </html>

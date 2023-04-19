@@ -20,6 +20,8 @@ public class TourService {
     {
         return tourRepository.findById(id);
     }
-
+    public List<Tour> findToursByCountryName(String name){
+        return tourRepository.findByCountry(name);
+    }
 }
 

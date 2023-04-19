@@ -29,7 +29,7 @@
                         <h3 class="card-title">${country.name}</h3>
 
                         <!-- Add an "Explore" button with a link to the country details page -->
-                        <a href="/country/${country.id}" class="btn btn-primary">Explore</a>
+                        <a href="/explorecountry/${country.name}" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 package com.visitafrica.tongaclient.controller;
 
 import com.visitafrica.tongaclient.model.*;
-import com.visitafrica.tongaclient.security.OptionalLogin;
 import com.visitafrica.tongaclient.security.OptionalLoginInterceptor;
 import com.visitafrica.tongaclient.service.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -14,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class UserController {
+    @Autowired
+    private BookService bookingService;
     @Autowired
     private CountryService countryService;
     @Autowired
@@ -56,6 +56,7 @@ public class UserController {
 
         if (email.equals(userService.getbyEmail(email).getEmail()) && BCrypt.checkpw(password, userService.getbyEmail(email).getPassword())) {
             optionalLoginInterceptor.addPermittedPath("/reviewtour");
+            optionalLoginInterceptor.addPermittedPath("/explorecountry/{country}");
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
@@ -128,7 +129,6 @@ public class UserController {
         return "exploretour";
     }
 
-    @OptionalLogin
     @GetMapping("/reviewtour")
     public String reviewSave(@RequestParam("rating_data") int ratingData,
                              @RequestParam("user_email") String userEmail,
@@ -152,13 +152,29 @@ public class UserController {
         return "/login";
     }
 
-    @GetMapping("/explorecountry/{id}")
-    public String exploirecountry()
+    @GetMapping("/explorecountry/{country}")
+    public String exploirecountry(Model model, @PathVariable("country") String name)
     {
-
-        return "explorecountry";
+        List<Tour> tourList = tourService.findToursByCountryName(name);
+        model.addAttribute("tourList", tourList);
+        return "tour";
     }
 
+    @PostMapping("/bookTour/{id}")
+    @ResponseBody
+    public Book bookTour(Book book,BindingResult bindingResult,Model model,@PathVariable("id") long id) {
+        // Perform booking logic
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", " Failed to book the tour!");
+            return book;
+        }
+        bookingService.save(book);
 
+        // Add booking object to model for displaying confirmation
+        model.addAttribute("booking", book);
 
+        // Return the view for booking confirmation
+        return book;
+    }
 }
+
