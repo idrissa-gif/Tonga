@@ -160,6 +160,76 @@ public class UserController {
         return "tour";
     }
 
+    @PostMapping("/submitRating")
+    public String SaveReview(Review review,BindingResult bindingResult,Model model) {
+        // Perform booking logic
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", " Failed to review !");
+            System.out.println("Error: " + bindingResult.toString());
+            return "/home";
+        }
+        reviewService.saveReview(review);
+        System.out.println(review.getReviewer_name());
+
+        // Add booking object to model for displaying confirmation
+        model.addAttribute("reviewing", review);
+
+        // Return the view for booking confirmation
+        return "home";
+    }
+    @PostMapping("/getRating/{id}")
+    public Map<String, Object> getRatingData(@RequestBody Map<String, Object> requestData) {
+        Map<String, Object> response = new HashMap<>();
+        List<Map<String, Object>> reviewContent = new ArrayList<>();
+
+        // Get request data
+        String target = (String) requestData.get("target");
+
+        // Perform database query
+        // (You can replace this with your own logic for database connection and query execution)
+        // ...
+        List<Review> reviews = reviewService.getReviewByTarget(target);
+        // Build response data
+        double averageRating = 0;
+        int totalReview = reviews.size();
+        int fiveStarReview = 0;
+        int fourStarReview = 0;
+        int threeStarReview = 0;
+        int twoStarReview = 0;
+        int oneStarReview = 0;
+        int totalUserRating = 0;
+
+        for(int i=0 ; i<reviews.size() ; i++)
+        {
+            if(reviews.get(i).getRate()==1) oneStarReview++;
+            else if(reviews.get(i).getRate()==2) twoStarReview++;
+            else if(reviews.get(i).getRate()==3) threeStarReview++;
+            else if(reviews.get(i).getRate()==4) fourStarReview++;
+            else if(reviews.get(i).getRate()==5) fiveStarReview++;
+
+            totalUserRating+=reviews.get(i).getRate();
+        }
+
+        // Populate reviewContent list with retrieved data
+        // ...
+
+        // Calculate average rating
+        if (totalReview > 0) {
+            averageRating = (double) totalUserRating / totalReview;
+        }
+
+        response.put("average_rating", String.format("%.1f", averageRating));
+        response.put("total_review", totalReview);
+        response.put("five_star_review", fiveStarReview);
+        response.put("four_star_review", fourStarReview);
+        response.put("three_star_review", threeStarReview);
+        response.put("two_star_review", twoStarReview);
+        response.put("one_star_review", oneStarReview);
+        response.put("review_data", reviewContent);
+
+        return response;
+    }
+
     @PostMapping("/bookTour/{id}")
     @ResponseBody
     public Book bookTour(Book book,BindingResult bindingResult,Model model,@PathVariable("id") long id) {

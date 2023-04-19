@@ -18,7 +18,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
@@ -110,16 +109,16 @@
               <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
             </h4>
             <div class="form-group">
-              <input type="text" name="target" id="target" class="form-control" value="<%=tourName%>" />
+              <input type="text" name="target" id="target" class="form-control" value="<%=tourName%>" readonly />
             </div>
             <div class="form-group">
-              <input type="text" name="user_name" id="user_name" class="form-control" value="<%=tourName%>" />
+              <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" required/>
             </div>
             <div class="form-group">
               <input type="email" name="user_email" id="user_email" class="form-control" placeholder="Enter Your Email" value="<%=userEmail%>"  />
             </div>
             <div class="form-group">
-              <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+              <textarea name="message" id="message" class="form-control" placeholder="Type Review Here"></textarea>
             </div>
             <div class="form-group text-center mt-4">
               <button type="button" class="btn btn-primary" id="save_review">Submit</button>
@@ -130,8 +129,8 @@
     </div>
   </div>
 </div>
-</body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script>
   $(document).ready(function() {
 
@@ -189,23 +188,28 @@
     });
 
     $('#save_review').click(function() {
-      var user_name = $('#user_name').val();
+      var reviewer_name = $('#reviewer_name').val();
       var user_email = $('#user_email').val();
-      var user_review = $('#user_review').val();
+      var message = $('#message').val();
+      var date = new Date();
+      var timestamp = date.getTime();
 
-      if (user_name == '' || user_review == '') {
+
+
+      if (user_email == '' || message == '') {
         alert("Please Fill Both Field");
         return false;
       } else {
         $.ajax({
-          url: "/submit_rating", // Update the URL to the appropriate endpoint
-          method: "POST",
+          url: '/submitRating', // Update the URL to the appropriate endpoint
+          method: 'POST',
           data: {
-            rating_data: rating_data,
-            user_name: user_name,
+            reviewer_name: reviewer_name,
             user_email: user_email,
-            user_review: user_review,
-            target: target
+            message: message,
+            target: target,
+            rate: rating_data,
+            time:timestamp,
           },
           success: function(data) {
             $('#review_modal').modal('hide');
@@ -217,9 +221,9 @@
           }
         })
       }
-      document.getElementById("user_name").value = "";
+      document.getElementById("reviewer_name").value = "";
       document.getElementById("user_email").value = "";
-      document.getElementById("user_review").value = "";
+      document.getElementById("message").value = "";
     });
 
 
@@ -229,8 +233,8 @@
     function load_rating_data() {
 
       $.ajax({
-        url: "/get_rating_data",
-        method: "POST",
+        url: "/get_rating_data/${tourName}",
+        method: "GET",
         data: {
           target: target
         },
@@ -322,4 +326,7 @@
 
   });
 </script>
+
+</body>
+
 </html>
