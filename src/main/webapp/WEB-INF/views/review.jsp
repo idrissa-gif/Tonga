@@ -233,14 +233,14 @@
     function load_rating_data() {
 
       $.ajax({
-        url: "/get_rating_data/${tourName}",
+        url: "/getRating/${tour.id}",
         method: "GET",
         data: {
           target: target
         },
         success: function(data) {
-          $('#average_rating').text(data.average_rating);
-          $('#total_review').text(data.total_review);
+          $('#average_rating').text(data['average_rating']);
+          $('#total_review').text(data['total_review']);
 
           var count_star = 0;
 
@@ -252,25 +252,25 @@
             }
           });
 
-          $('#total_five_star_review').text(data.five_star_review);
+          $('#total_five_star_review').text(data['five_star_review']);
 
-          $('#total_four_star_review').text(data.four_star_review);
+          $('#total_four_star_review').text(data['four_star_review']);
 
-          $('#total_three_star_review').text(data.three_star_review);
+          $('#total_three_star_review').text(data['three_star_review']);
 
-          $('#total_two_star_review').text(data.two_star_review);
+          $('#total_two_star_review').text(data['three_star_review']);
 
-          $('#total_one_star_review').text(data.one_star_review);
+          $('#total_one_star_review').text(data['three_star_review']);
 
-          $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
+          $('#five_star_progress').css('width', (data['five_star_review'] / data['total_review']) * 100 + '%');
 
-          $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
+          $('#four_star_progress').css('width', (data['four_star_review']/ data['total_review']) * 100 + '%');
 
-          $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
+          $('#three_star_progress').css('width', (data['three_star_review'] / data['total_review']) * 100 + '%');
 
-          $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
+          $('#two_star_progress').css('width', (data['two_star_review'] / data['total_review']) * 100 + '%');
 
-          $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
+          $('#one_star_progress').css('width', (data['one_star_review'] / data['total_review']) * 100 + '%');
 
           if (data.review_data.length > 0) {
             var html = '';

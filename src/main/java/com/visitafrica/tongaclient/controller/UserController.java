@@ -177,13 +177,14 @@ public class UserController {
         // Return the view for booking confirmation
         return "home";
     }
-    @PostMapping("/getRating/{id}")
-    public Map<String, Object> getRatingData(@RequestBody Map<String, Object> requestData) {
-        Map<String, Object> response = new HashMap<>();
+    @GetMapping("/getRating/{id}")
+    @ResponseBody
+    public Map<String, Object> getRatingData(@PathVariable ("id") String id) {
+        Map<String, Object> data = new HashMap<>();
         List<Map<String, Object>> reviewContent = new ArrayList<>();
 
         // Get request data
-        String target = (String) requestData.get("target");
+        String target = id;
 
         // Perform database query
         // (You can replace this with your own logic for database connection and query execution)
@@ -218,16 +219,16 @@ public class UserController {
             averageRating = (double) totalUserRating / totalReview;
         }
 
-        response.put("average_rating", String.format("%.1f", averageRating));
-        response.put("total_review", totalReview);
-        response.put("five_star_review", fiveStarReview);
-        response.put("four_star_review", fourStarReview);
-        response.put("three_star_review", threeStarReview);
-        response.put("two_star_review", twoStarReview);
-        response.put("one_star_review", oneStarReview);
-        response.put("review_data", reviewContent);
+        data.put("average_rating", String.format("%.1f", averageRating));
+        data.put("total_review", totalReview);
+        data.put("five_star_review", fiveStarReview);
+        data.put("four_star_review", fourStarReview);
+        data.put("three_star_review", threeStarReview);
+        data.put("two_star_review", twoStarReview);
+        data.put("one_star_review", oneStarReview);
+        data.put("review_data", reviewContent);
 
-        return response;
+        return data;
     }
 
     @PostMapping("/bookTour/{id}")
