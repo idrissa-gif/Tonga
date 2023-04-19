@@ -179,16 +179,15 @@ public class UserController {
     }
     @GetMapping("/getRating/{id}")
     @ResponseBody
-    public Map<String, Object> getRatingData(@PathVariable ("id") String id) {
+    public Map<String, Object> getRatingData(@PathVariable ("id") String target) {
         Map<String, Object> data = new HashMap<>();
-        List<Map<String, Object>> reviewContent = new ArrayList<>();
 
-        // Get request data
-        String target = id;
+
 
         // Perform database query
         // (You can replace this with your own logic for database connection and query execution)
         // ...
+        System.out.println(target);
         List<Review> reviews = reviewService.getReviewByTarget(target);
         // Build response data
         double averageRating = 0;
@@ -207,9 +206,9 @@ public class UserController {
             else if(reviews.get(i).getRate()==3) threeStarReview++;
             else if(reviews.get(i).getRate()==4) fourStarReview++;
             else if(reviews.get(i).getRate()==5) fiveStarReview++;
-
             totalUserRating+=reviews.get(i).getRate();
         }
+
 
         // Populate reviewContent list with retrieved data
         // ...
@@ -226,7 +225,7 @@ public class UserController {
         data.put("three_star_review", threeStarReview);
         data.put("two_star_review", twoStarReview);
         data.put("one_star_review", oneStarReview);
-        data.put("review_data", reviewContent);
+        data.put("review_data", reviews);
 
         return data;
     }

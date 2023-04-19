@@ -233,7 +233,7 @@
     function load_rating_data() {
 
       $.ajax({
-        url: "/getRating/${tour.id}",
+        url: "/getRating/${tour.tour_name}",
         method: "GET",
         data: {
           target: target
@@ -246,7 +246,7 @@
 
           $('.main_star').each(function() {
             count_star++;
-            if (Math.ceil(data.average_rating) >= count_star) {
+            if (Math.ceil(data['average_rating']) >= count_star) {
               $(this).addClass('text-warning');
               $(this).addClass('star-light');
             }
@@ -272,26 +272,26 @@
 
           $('#one_star_progress').css('width', (data['one_star_review'] / data['total_review']) * 100 + '%');
 
-          if (data.review_data.length > 0) {
+          if (data['review_data'].length > 0) {
             var html = '';
-
-            for (var count = 0; count < data.review_data.length; count++) {
+            var reviews = data['review_data'];
+            for (var count = 0; count < reviews.length; count++) {
               html += '<div class="row mb-3">';
 
-              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].user_name.charAt(0) + '</h3></div></div>';
+              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + reviews[count].reviewer_name+ '</h3></div></div>';
 
               html += '<div class="col-sm-11">';
 
               html += '<div class="card">';
 
-              html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
+              html += '<div class="card-header"><b>' + reviews[count].reviewer_name + '</b></div>';
 
               html += '<div class="card-body">';
 
               for (var star = 1; star <= 5; star++) {
                 var class_name = '';
 
-                if (data.review_data[count].rating >= star) {
+                if (reviews[count].rate >= star) {
                   class_name = 'text-warning';
                 } else {
                   class_name = 'star-light';
@@ -302,11 +302,19 @@
 
               html += '<br />';
 
-              html += data.review_data[count].user_review;
+              html += reviews[count].message;
 
               html += '</div>';
 
-              html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
+              var date = new Date(reviews[count].time);
+              var formattedDate = date.getFullYear().toString().substr(-2) + "-" +
+                      (date.getMonth() + 1).toString().padStart(2, '0') + "-" +
+                      date.getDate().toString().padStart(2, '0') + " " +
+                      date.getHours().toString().padStart(2, '0') + ":" +
+                      date.getMinutes().toString().padStart(2, '0');
+              html += '<div class="card-footer text-right">On ' + formattedDate + '</div>';
+
+
 
               html += '</div>';
 

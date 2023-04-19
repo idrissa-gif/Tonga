@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review,Long> {
-    @Query("select r from Review r where r.target = ?1")
+    @Query("select r from Review r where LOWER(r.target) =LOWER(?1)")
     public List<Review> getReviewByTarget(String target);
 }
