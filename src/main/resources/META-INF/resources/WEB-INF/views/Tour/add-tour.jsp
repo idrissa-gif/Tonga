@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,10 @@
         <div class="mb-3">
             <label for="tour_name" class="form-label">Tour Name</label>
             <input type="text" class="form-control" id="tour_name" name="tour_name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description">
         </div>
         <div class="mb-3">
             <label for="tour_operator" class="form-label">Tour Operator</label>

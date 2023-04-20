@@ -1,5 +1,6 @@
 package com.visitafrica.tonga.model;
 
+import com.mysql.cj.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -12,8 +13,9 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tour_id")
-    private Integer id;
+    private Long id;
     private String tour_name ;
+    private String description;
     private String tour_operator;
     private String countries;
     private String prices;
@@ -24,11 +26,11 @@ public class Tour {
     private String image3;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,6 +40,14 @@ public class Tour {
 
     public void setTour_name(String tour_name) {
         this.tour_name = tour_name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTour_operator() {

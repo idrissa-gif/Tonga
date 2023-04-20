@@ -20,4 +20,12 @@ public class OperatorService {
     public List<Operator> findOperators() {
         return operatorRepository.findAll();
     }
+
+    public Operator getOperatorById(Long operatorId) {
+        return operatorRepository.findById(operatorId).get();
+    }
+
+    public void updateOperator(Operator operator) {
+        operatorRepository.updateOperator(operator.getId(), operator.getName(), operator.getTours(), operator.getCountries(),operator.getRate(),operator.getImage(),operator.getDescription());
+    }
 }

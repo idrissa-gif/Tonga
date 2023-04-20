@@ -13,6 +13,9 @@ import com.visitafrica.tonga.service.CountryService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid; // Import the Valid annotation
 import com.visitafrica.tonga.model.Operator;
 import com.visitafrica.tonga.service.OperatorService;
@@ -46,10 +49,19 @@ public class TongaController {
     }
 
     @PostMapping("/login")
-    public String signin(Model model) {
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpServletRequest request) {
+        // Authenticate user and set session attribute
+        HttpSession session = request.getSession();
+        session.setAttribute("user", username);
+
         return "/dashboard";
     }
-
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        // Invalidate session and redirect to login page
+        session.invalidate();
+        return "redirect:/login";
+    }
 
     @GetMapping({"/", "/welcome","/dashboard"})
     public String welcome(Model model) {
@@ -140,8 +152,25 @@ public class TongaController {
         model.addAttribute("operators", operatorList);
         return "/Operator/manage-operator";
     }
+    @GetMapping("/editOperator")
+    public String editOperator(@RequestParam("id") Long operator_id, Model model) {
+        // Retrieve the operator information by ID from the service
+        Operator operator = operatorService.getOperatorById(operator_id);
 
+        // Add the operator object to the model to be passed to the view
+        model.addAttribute("operator", operator);
 
+        // Return the view name for the edit operator page
+        return "/Operator/edit-operator";
+    }
+    @GetMapping("/UpdateOperator")
+    public String updateOperator(@ModelAttribute("operator") Operator operator, Model model) {
+        // Call the service to update the operator in the database
+        operatorService.updateOperator(operator);
+
+        model.addAttribute("message", "Operator updated successfully!"); // Add success message to model
+        return "/Operator/edit-operator"; // Redirect to the addOperator form after saving
+    }
     /** END OF OPERATOR FUNCTIONS **/
 
     /**START OF TOUR FUNCTIONS**/
@@ -153,7 +182,7 @@ public class TongaController {
 
     @GetMapping("/addTour")
     public String addTour(Tour tour,BindingResult bindingResult,Model model) {
-        tourService.saveTour(tour);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", " Failed to add Tour!");
             return "/Tour/add-tour"; // Return back to the form if validation fails
@@ -163,10 +192,18 @@ public class TongaController {
         model.addAttribute("message", "Tour added successfully!"); // Add success message to model
         return "/Tour/add-tour";
     }
+    @GetMapping("/updateTour")
+    public String updateTour(@ModelAttribute("tour") Tour tour, Model model) {
+        tourService.updateTour(tour);
+
+        model.addAttribute("message", "Tour updated successfully!"); // Add success message to model
+        editTourDetail(model);
+        return "/Tour/manage-tour";
+    }
     @GetMapping("/deleteTour")
     public String RemoveTour(@RequestParam("tour_id")int tour_id,Model model)
     {
-        List<Tour> tourList = tourService.findTour();
+        List<Tour> tourList = tourService.findTours();
         for (int i = 0; i < tourList.size(); i++) {
             System.out.println(tourList.get(i).getCountries());
             if(tour_id==tourList.get(i).getId()){
@@ -181,10 +218,18 @@ public class TongaController {
     @GetMapping("/manage-tour")
     public String editTourDetail(Model model)
     {
-        List<Tour> tours = tourService.findTour();
+        List<Tour> tours = tourService.findTours();
         model.addAttribute("tours", tours);
         return "/Tour/manage-tour";
     }
+
+    @GetMapping("/editTour")
+    public String editTour(@RequestParam("tour_id") long tour_id,Model model){
+        Tour tour = tourService.findTourById(tour_id);
+        model.addAttribute("tour", tour);
+        return "/Tour/edit-tour-detail";
+    }
+
     /** END OF TOUR FUNCTIONS **/
 
 
