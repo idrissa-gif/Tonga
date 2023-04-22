@@ -233,7 +233,7 @@
     function load_rating_data() {
 
       $.ajax({
-        url: "/getRating/${tour.id}",
+        url: "/getRating/${tour.tour_name}",
         method: "GET",
         data: {
           target: target
