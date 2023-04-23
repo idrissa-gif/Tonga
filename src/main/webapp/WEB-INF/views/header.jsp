@@ -29,7 +29,7 @@
                 <a class="nav-link" id="homeLink" href="/welcome">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="tourLink" href="#">Tour</a>
+                <a class="nav-link" id="tourLink" href="/tour">Tour</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="destinationLink" href="/country">Destination</a>

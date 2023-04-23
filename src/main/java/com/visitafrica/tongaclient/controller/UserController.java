@@ -1,7 +1,6 @@
 package com.visitafrica.tongaclient.controller;
 
 import com.visitafrica.tongaclient.model.*;
-import com.visitafrica.tongaclient.security.OptionalLoginInterceptor;
 import com.visitafrica.tongaclient.service.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class UserController {
     @Autowired
     private HttpSession session;
     @Autowired
-    private OptionalLoginInterceptor optionalLoginInterceptor;
-    @Autowired
     private ReviewService reviewService;
 
     @GetMapping("/map")
@@ -51,15 +48,16 @@ public class UserController {
 
     @PostMapping("/login")
     public String signin(Model model,
+                         HttpSession session,
                          @RequestParam("email") String email,
                          @RequestParam("password") String password) {
 
         if (email.equals(userService.getbyEmail(email).getEmail()) && BCrypt.checkpw(password, userService.getbyEmail(email).getPassword())) {
-            optionalLoginInterceptor.addPermittedPath("/reviewtour");
-            optionalLoginInterceptor.addPermittedPath("/explorecountry/{country}");
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
+            System.out.println("hello logged in");
+            session.setAttribute("isLoggedIn", true); // add a flag to session
             return "home";
         } else {
             model.addAttribute("message", "Invalid email or password");
@@ -68,11 +66,18 @@ public class UserController {
     }
 
 
+
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
         List<Tour> tourList = tourService.findTours();
         model.addAttribute("tourList", tourList);
         return "home";
+    }
+    @GetMapping("/tour")
+    public String tours(Model model) {
+        List<Tour> tourList = tourService.findTours();
+        model.addAttribute("tourList", tourList);
+        return "tour";
     }
 
 
@@ -136,8 +141,6 @@ public class UserController {
                              @RequestParam("target") String target,
                              HttpServletRequest request) throws Exception {
 
-        // Access the 'target' parameter value
-        System.out.println("Target: " + target);
 
         // Add your business logic here, e.g., create a Review object and save/update it
          User user = userService.getbyEmail(userEmail);
@@ -177,6 +180,7 @@ public class UserController {
         // Return the view for booking confirmation
         return "home";
     }
+
     @GetMapping("/getRating/{id}")
     @ResponseBody
     public Map<String, Object> getRatingData(@PathVariable ("id") String id) {
@@ -230,6 +234,7 @@ public class UserController {
 
         return data;
     }
+
 
     @PostMapping("/bookTour/{id}")
     @ResponseBody

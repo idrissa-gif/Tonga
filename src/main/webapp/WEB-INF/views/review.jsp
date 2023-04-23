@@ -216,8 +216,12 @@
             load_rating_data();
             alert("Thanks for your valuable review !!!");
           },
-          error: function(error) {
-            console.log(error);
+          error: function(xhr, status, error) {
+            if (xhr.status === 401) {
+              window.location.href = '/login';
+            } else {
+              console.log(error)
+            }
           }
         })
       }
