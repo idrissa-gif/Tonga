@@ -1,7 +1,5 @@
 package com.visitafrica.tongaclient.configure;
 
-import com.visitafrica.tongaclient.security.AuthenticationInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,8 +13,7 @@ import javax.servlet.http.HttpSession;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private AuthenticationInterceptor authenticationInterceptor;
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -32,7 +29,6 @@ public class WebConfig implements WebMvcConfigurer {
                     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                         HttpSession session = request.getSession();
                         Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
-                        System.out.println(isLoggedIn);
                         if (isLoggedIn != null && isLoggedIn) {
                             return true;
                         } else {
@@ -43,10 +39,24 @@ public class WebConfig implements WebMvcConfigurer {
                 })
                 .excludePathPatterns("/login") // Exclude login endpoint from optional login
                 .excludePathPatterns("/register")
-                .excludePathPatterns("/registration");
+                .excludePathPatterns("/registration")
+                .excludePathPatterns("/")
+                .excludePathPatterns("/welcome")
+                .excludePathPatterns("/tour")
+                .excludePathPatterns("/registration")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/country")
+                .excludePathPatterns("/DetailTourView/{id}")
+                .excludePathPatterns("/explorecountry/{country}")
+                .excludePathPatterns("/getRating/{id}")
+                .excludePathPatterns("/reviewtour")
+                .excludePathPatterns("/bookTour/{id}")
+                .excludePathPatterns("/submitRating");
+
         // Exclude signup endpoint from optional login
         // Add other endpoints to be excluded from optional login as needed
     }
+
 
 
 }

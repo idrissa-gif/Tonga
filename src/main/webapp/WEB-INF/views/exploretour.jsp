@@ -135,7 +135,9 @@
                     </div>
                     <p>${tour.description}</p>
                     <!-- Update the "google map" section -->
-                    <div id="map-canvas" style="height:300px; width:500px"></div>
+                    <div id="map-canvas">
+                        <jsp:include page="maptest.jsp"></jsp:include>
+                    </div>
                     <input type="text" id="searchInput" placeholder="Search for a location...">
                     <button onclick="searchLocation()">Search</button>
 
@@ -348,7 +350,6 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
     </div>
@@ -419,8 +420,12 @@
                         $('#start_date').val('');
 
                 },
-                error: function(error) {
-                    console.log(error);
+                error: function(xhr, status, error) {
+                    if (xhr.status === 401) {
+                        window.location.href = '/login';
+                    } else {
+                        console.log(error);
+                    }
                 }
             });
         });

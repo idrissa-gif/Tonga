@@ -1,55 +1,67 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: idrissamahamoudoudicko
-  Date: 17/4/2023
-  Time: 23:45
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google Maps Places API Example</title>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjxnnlm87un5VjTqIJ_W3lb-vDtCKXxV0&libraries=places"
-          async defer></script>
+  <meta charset="UTF-8">
+  <title>Map Example</title>
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script>
-    function searchLocation() {
-      var searchInput = document.getElementById('searchInput').value;
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 15
+    const process = { env: {} };
+    process.env.GOOGLE_MAPS_API_KEY =
+            "AIzaSyCBXxFvb3CSMuRa1fy2sadaSPICOte7gx8";
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBXxFvb3CSMuRa1fy2sadaSPICOte7gx8"></script>
+  <script>
+    let infowindow; // define the infowindow variable
+
+    function initMap() {
+      const center = {lat: 37.7749, lng: -122.4194};
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: center,
       });
-      var service = new google.maps.places.PlacesService(map);
-      service.textSearch({
-        query: searchInput,
-        location: map.getCenter(),
-        radius: 500
-      }, callback);
+
+      infowindow = new google.maps.InfoWindow(); // initialize the infowindow
+
+      const service = new google.maps.places.PlacesService(map);
+      const request = {
+        query: "dhaka",
+        fields: ["name", "geometry"],
+      };
+
+      service.textSearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (let i = 0; i < results.length; i++) {
+            createMarker(results[i], map);
+          }
+        }
+      });
     }
 
-    function callback(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          var place = results[i];
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          var infowindow = new google.maps.InfoWindow({
-            content: place.name
-          });
-          marker.addListener('click', function() {
-            infowindow.open(map, marker);
-          });
-        }
-      }
+    function createMarker(place, map) {
+      if (!place.geometry || !place.geometry.location) return;
+
+      const marker = new google.maps.Marker({
+        map,
+        position: place.geometry.location,
+      });
+
+      google.maps.event.addListener(marker, "click", () => {
+        infowindow.setContent(place.name || "");
+        infowindow.open(map, marker);
+      });
     }
+
   </script>
 </head>
 <body>
-<h1>Google Maps Places API Example</h1>
-<input type="text" id="searchInput" placeholder="Enter a location">
-<button onclick="searchLocation()">Search</button>
-<div id="map" style="height: 400px; width: 100%;></div>
+<div id="map"></div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBXxFvb3CSMuRa1fy2sadaSPICOte7gx8&callback=initMap"></script>
 </body>
 </html>

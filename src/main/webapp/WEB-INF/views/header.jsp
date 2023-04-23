@@ -34,14 +34,29 @@
             <li class="nav-item">
                 <a class="nav-link" id="destinationLink" href="/country">Destination</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="signInLink" href="#">Sign In</a>
+            <% if (session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- User Profile Icon Image -->
+                    <img src="/images/icons/user.png" alt="User Profile" width="25" height="25">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
             </li>
-
+            <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Sign In</a>
+            </li>
+            <% } %>
         </ul>
     </div>
+
 </nav>
 
 </body>
-<script src="script.js"/></script>
+<script src="${pageContext.request.contextPath}/script.js"/></script>
 </html>

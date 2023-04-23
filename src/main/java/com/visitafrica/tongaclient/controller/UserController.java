@@ -4,6 +4,8 @@ import com.visitafrica.tongaclient.model.*;
 import com.visitafrica.tongaclient.service.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,7 +58,6 @@ public class UserController {
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
-            System.out.println("hello logged in");
             session.setAttribute("isLoggedIn", true); // add a flag to session
             return "home";
         } else {
@@ -65,6 +66,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session, Model model) {
+        // invalidate session
+        session.invalidate();
+
+        // clear model attributes
+        model.addAttribute("user_email", "");
+        model.addAttribute("tourList", new ArrayList<Tour>());
+
+        // redirect to login page
+        return "redirect:/login";
+    }
 
 
     @GetMapping({"/", "/welcome"})
@@ -164,21 +177,20 @@ public class UserController {
     }
 
     @PostMapping("/submitRating")
-    public String SaveReview(Review review,BindingResult bindingResult,Model model) {
-        // Perform booking logic
+    public ResponseEntity<String> saveReview(@Valid Review review, BindingResult bindingResult, HttpSession session) {
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        if (isLoggedIn == null || !isLoggedIn) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+// Perform booking logic
         if (bindingResult.hasErrors()) {
-            model.addAttribute("message", " Failed to review !");
-            System.out.println("Error: " + bindingResult.toString());
-            return "/home";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to review!");
         }
         reviewService.saveReview(review);
-        System.out.println(review.getReviewer_name());
 
-        // Add booking object to model for displaying confirmation
-        model.addAttribute("reviewing", review);
 
-        // Return the view for booking confirmation
-        return "home";
+        // Return success message
+        return ResponseEntity.ok("Review saved successfully!");
     }
 
     @GetMapping("/getRating/{id}")
@@ -238,11 +250,17 @@ public class UserController {
 
     @PostMapping("/bookTour/{id}")
     @ResponseBody
-    public Book bookTour(Book book,BindingResult bindingResult,Model model,@PathVariable("id") long id) {
+    public ResponseEntity<?> bookTour(Book book, BindingResult bindingResult, Model model, @PathVariable("id") long id, HttpSession session) {
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        System.out.println(" Hello "+isLoggedIn);
+        if (isLoggedIn == null || !isLoggedIn) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         // Perform booking logic
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", " Failed to book the tour!");
-            return book;
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
         }
         bookingService.save(book);
 
@@ -250,7 +268,8 @@ public class UserController {
         model.addAttribute("booking", book);
 
         // Return the view for booking confirmation
-        return book;
+        return ResponseEntity.ok(book);
     }
+
 }
 
