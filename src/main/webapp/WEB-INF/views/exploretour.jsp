@@ -294,15 +294,15 @@
                     <form action="/bookTour/${tour.id}" method="post" id="booking-form">
                         <div class="form-group">
                             <label for="full_name">Name</label>
-                            <input name="full_name" id="full_name" class="form-control" placeholder="Enter your name" required />
+                            <input name="full_name" id="full_name" class="form-control" placeholder="Enter your name" value="${sessionScope.username}" readonly />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input name="email" id="email" class="form-control" placeholder="Enter your email" required/>
+                            <input name="email" id="email" class="form-control" placeholder="Enter your email" value="${sessionScope.email}" readonly/>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input name="phone" id="phone" class="form-control" placeholder="Enter your phone number" />
+                            <input name="phone" id="phone" class="form-control" placeholder="Enter your phone number" value="${sessionScope.phone}"/>
                         </div>
                         <div class="form-group">
                             <label for="adults">Number of People</label>

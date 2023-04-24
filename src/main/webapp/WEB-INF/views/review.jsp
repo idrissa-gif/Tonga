@@ -9,6 +9,9 @@
 <%
   String tourName = request.getParameter("tourName");
   String userEmail = request.getParameter("user_email");
+  String username = (String) session.getAttribute("username");
+  String email = (String) session.getAttribute("email");
+
 %>
 <!DOCTYPE HTML>
 <html>
@@ -90,7 +93,7 @@
       </div>
     </div>
   </div>
-  <div class="mt-5" id="review_content">
+  <div class="mt-5" id="reviewcontent">
     <div id="review_modal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -112,10 +115,10 @@
               <input type="text" name="target" id="target" class="form-control" value="<%=tourName%>" readonly />
             </div>
             <div class="form-group">
-              <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" required/>
+              <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" value = "${sessionScope.username}" readonly/>
             </div>
             <div class="form-group">
-              <input type="email" name="user_email" id="user_email" class="form-control" placeholder="Enter Your Email" value="<%=userEmail%>"  />
+              <input type="email" name="user_email" id="user_email" class="form-control" placeholder="Enter Your Email" value="${sessionScope.email}" readonly/>
             </div>
             <div class="form-group">
               <textarea name="message" id="message" class="form-control" placeholder="Type Review Here"></textarea>
@@ -127,6 +130,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="mt-5" id="review_content">
+
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -196,8 +202,8 @@
 
 
 
-      if (user_email == '' || message == '') {
-        alert("Please Fill Both Field");
+      if ( message == '') {
+        alert("Please a provide a feedback");
         return false;
       } else {
         $.ajax({
@@ -235,7 +241,6 @@
 
 
     function load_rating_data() {
-
       $.ajax({
         url: "/getRating/${tour.tour_name}",
         method: "GET",
@@ -245,77 +250,55 @@
         success: function(data) {
           $('#average_rating').text(data['average_rating']);
           $('#total_review').text(data['total_review']);
-
           var count_star = 0;
-
           $('.main_star').each(function() {
             count_star++;
-            if (Math.ceil(data.average_rating) >= count_star) {
+            if (Math.ceil(data['average_rating']) >= count_star) {
               $(this).addClass('text-warning');
               $(this).addClass('star-light');
             }
           });
-
           $('#total_five_star_review').text(data['five_star_review']);
-
           $('#total_four_star_review').text(data['four_star_review']);
-
           $('#total_three_star_review').text(data['three_star_review']);
-
           $('#total_two_star_review').text(data['three_star_review']);
-
           $('#total_one_star_review').text(data['three_star_review']);
-
           $('#five_star_progress').css('width', (data['five_star_review'] / data['total_review']) * 100 + '%');
-
           $('#four_star_progress').css('width', (data['four_star_review']/ data['total_review']) * 100 + '%');
-
           $('#three_star_progress').css('width', (data['three_star_review'] / data['total_review']) * 100 + '%');
-
           $('#two_star_progress').css('width', (data['two_star_review'] / data['total_review']) * 100 + '%');
-
           $('#one_star_progress').css('width', (data['one_star_review'] / data['total_review']) * 100 + '%');
-
-          if (data.review_data.length > 0) {
+          if (data['review_data'].length > 0) {
             var html = '';
-
-            for (var count = 0; count < data.review_data.length; count++) {
+            var reviews = data['review_data'];
+            for (var count = 0; count < reviews.length; count++) {
               html += '<div class="row mb-3">';
-
-              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].user_name.charAt(0) + '</h3></div></div>';
-
+              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + reviews[count].reviewer_name.charAt(0)+ '</h3></div></div>';
               html += '<div class="col-sm-11">';
-
               html += '<div class="card">';
-
-              html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
-
+              html += '<div class="card-header"><b>' + reviews[count].reviewer_name + '</b></div>';
               html += '<div class="card-body">';
-
               for (var star = 1; star <= 5; star++) {
                 var class_name = '';
-
-                if (data.review_data[count].rating >= star) {
+                if (reviews[count].rate >= star) {
                   class_name = 'text-warning';
                 } else {
                   class_name = 'star-light';
                 }
-
                 html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
               }
-
               html += '<br />';
-
-              html += data.review_data[count].user_review;
-
+              html += reviews[count].message;
               html += '</div>';
-
-              html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
-
+              var date = new Date(reviews[count].time);
+              var formattedDate = date.getFullYear().toString().substr(-2) + "-" +
+                      (date.getMonth() + 1).toString().padStart(2, '0') + "-" +
+                      date.getDate().toString().padStart(2, '0') + " " +
+                      date.getHours().toString().padStart(2, '0') + ":" +
+                      date.getMinutes().toString().padStart(2, '0');
+              html += '<div class="card-footer text-right">On ' + formattedDate + '</div>';
               html += '</div>';
-
               html += '</div>';
-
               html += '</div>';
             }
 
@@ -327,7 +310,6 @@
         }
       })
     }
-
   });
 </script>
 

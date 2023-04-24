@@ -51,7 +51,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/getRating/{id}")
                 .excludePathPatterns("/reviewtour")
                 .excludePathPatterns("/bookTour/{id}")
-                .excludePathPatterns("/submitRating");
+                .excludePathPatterns("/submitRating")
+                .excludePathPatterns("/images/**")
+                .excludePathPatterns("classpath:/images/");
 
         // Exclude signup endpoint from optional login
         // Add other endpoints to be excluded from optional login as needed

@@ -53,11 +53,14 @@ public class UserController {
                          HttpSession session,
                          @RequestParam("email") String email,
                          @RequestParam("password") String password) {
-
-        if (email.equals(userService.getbyEmail(email).getEmail()) && BCrypt.checkpw(password, userService.getbyEmail(email).getPassword())) {
+        User user = userService.getbyEmail(email);
+        if (email.equals(user.getEmail()) && BCrypt.checkpw(password, user.getPassword())) {
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
+            session.setAttribute("username",user.getUsername());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("phone", user.getPhone());
             session.setAttribute("isLoggedIn", true); // add a flag to session
             return "home";
         } else {
@@ -242,7 +245,7 @@ public class UserController {
         data.put("three_star_review", threeStarReview);
         data.put("two_star_review", twoStarReview);
         data.put("one_star_review", oneStarReview);
-        data.put("review_data", reviewContent);
+        data.put("review_data", reviews);
 
         return data;
     }
