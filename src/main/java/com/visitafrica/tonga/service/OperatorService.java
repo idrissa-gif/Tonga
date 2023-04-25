@@ -28,4 +28,8 @@ public class OperatorService {
     public void updateOperator(Operator operator) {
         operatorRepository.updateOperator(operator.getId(), operator.getName(), operator.getTours(), operator.getCountries(),operator.getRate(),operator.getImage(),operator.getDescription());
     }
+
+    public long getOperatorCount() {
+        return operatorRepository.count();
+    }
 }

@@ -41,6 +41,9 @@
         </div>
     </form>
 </div>
+<div class="fixed-bottom">
+    <jsp:include page="../includes/footer.jsp"/>
+</div>
 
 <!-- Bootstrap JS -->
 

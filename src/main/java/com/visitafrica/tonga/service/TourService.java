@@ -29,5 +29,9 @@ public class TourService {
     public void updateTour(Tour tour) {
         tourRepository.updateTour(tour.getId(), tour.getTour_name(), tour.getDescription(),tour.getTour_operator(),tour.getCountries(),tour.getPrices(),tour.getRate(),tour.getImage1(),tour.getImage2(),tour.getImage3());
     }
+
+    public long getTourCount() {
+        return tourRepository.count();
+    }
 }
 

@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-<div style="margin-bottom: 5%;">
+<div style="margin-bottom: 200px;">
     <jsp:include page="includes/sidebar.jsp"/>
 </div>
 <div class="row">
@@ -15,8 +15,8 @@
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
                 <h5 class="card-title">TOTAL COUNTRY</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-success">View Details</button>
+                <p class="card-text">(${totalcountry})</p>
+                <a href="/manage-country" class="btn btn-secondary">View Details</a>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
                 <h5 class="card-title">TOTAL TOUR</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-light">View Details</button>
+                <p class="card-text">(${totaltour})</p>
+                <a  href="/manage-tour" class="btn btn-secondary">View Details</a>
             </div>
         </div>
     </div>
@@ -35,8 +35,8 @@
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
                 <h5 class="card-title">TOTAL USERS</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-light">View Details</button>
+                <p class="card-text">(${totaloperator})</p>
+                <a class="btn btn-secondary" href="#">View Details</a>
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
                 <h5 class="card-title">TOTAL OPERATOR</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-light">View Details</button>
+                <p class="card-text">(${totaloperator})</p>
+                <a  class="btn btn-secondary" href="/manage-operator">View Details</a>
             </div>
         </div>
     </div>
@@ -54,9 +54,9 @@
     <div class="col-md-4" style="margin-bottom: 100px;">
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
-                <h5 class="card-title">TOTAL SUGGESTION PLACES</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-light">View Details</button>
+                <h5 class="card-title">TOTAL REVIEWS</h5>
+                <p class="card-text">(${totalreview})</p>
+                <a class="btn btn-secondary" href="/reviews">View Details</a>
             </div>
         </div>
     </div>
@@ -64,15 +64,15 @@
     <div class="col-md-4" style="margin-bottom: 100px;">
         <div class="card" style="text-align: center; margin-left: 2%">
             <div class="card-body">
-                <h5 class="card-title">TOTAL SUGGESTION PLACES</h5>
-                <p class="card-text">(28)</p>
-                <button class="btn-light">View Details</button>
+                <h5 class="card-title">TOTAL BOOKS</h5>
+                <p class="card-text">(${totalbook})</p>
+                <a class="btn btn-secondary" href="/books">View Details</a>
             </div>
         </div>
     </div>
 
 </div>
-<div>
+<div class="fixed-bottom">
     <jsp:include page="includes/footer.jsp"/>
 </div>
 </body>

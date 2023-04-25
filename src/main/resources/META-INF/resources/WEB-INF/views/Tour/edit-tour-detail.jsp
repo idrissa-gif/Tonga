@@ -66,6 +66,9 @@
         <span>${message}</span>
     </div>
 </div>
+<div class="fixed-bottom">
+    <jsp:include page="../includes/footer.jsp"/>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta2/js/bootstrap.min.js"></script>
 

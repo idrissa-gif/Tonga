@@ -48,6 +48,9 @@
         </div>
     </form>
 </div>
+<div class="fixed-bottom">
+    <jsp:include page="../includes/footer.jsp"/>
+</div>
 <!-- jQuery -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
@@ -56,9 +59,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<footer>
-    <div style="padding-top: 100px;">
-        <jsp:include page="../includes/footer.jsp"/>
-    </div>
-</footer>
+
 </html>

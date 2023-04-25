@@ -15,5 +15,8 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
+    public long getReviewCount() {
+        return reviewRepository.count();
+    }
 }
 

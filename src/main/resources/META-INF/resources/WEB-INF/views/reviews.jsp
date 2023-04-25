@@ -59,7 +59,9 @@
         </tbody>
     </table>
 </div>
-
+<div class="fixed-bottom">
+    <jsp:include page="includes/footer.jsp"/>
+</div>
 <!-- Include jQuery for handling mouse events -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

@@ -55,4 +55,8 @@ public class CountryService {
             throw new RuntimeException("Country not found with ID: " + countryId);
         }
     }
+
+    public long getCountryCount() {
+        return countryRepository.count();
+    }
 }

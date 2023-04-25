@@ -1,15 +1,11 @@
 package com.visitafrica.tonga.controller;
 
-import com.visitafrica.tonga.model.Country;
-import com.visitafrica.tonga.model.Review;
-import com.visitafrica.tonga.model.Tour;
-import com.visitafrica.tonga.service.ReviewService;
-import com.visitafrica.tonga.service.TourService;
+import com.visitafrica.tonga.model.*;
+import com.visitafrica.tonga.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.visitafrica.tonga.service.CountryService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid; // Import the Valid annotation
-import com.visitafrica.tonga.model.Operator;
-import com.visitafrica.tonga.service.OperatorService;
+
 import java.util.List;
 
 
@@ -36,9 +31,12 @@ public class TongaController {
 
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private BookService bookService;
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
 
@@ -53,7 +51,6 @@ public class TongaController {
         // Authenticate user and set session attribute
         HttpSession session = request.getSession();
         session.setAttribute("user", username);
-
         return "/dashboard";
     }
     @GetMapping("/logout")
@@ -65,6 +62,18 @@ public class TongaController {
 
     @GetMapping({"/", "/welcome","/dashboard"})
     public String welcome(Model model) {
+        long totalcountry = countryService.getCountryCount();
+        long totaltour = tourService.getTourCount();
+        long totaloperator = operatorService.getOperatorCount();
+        long totalreview = reviewService.getReviewCount();
+        long totalbook = bookService.getBookCount();
+
+        model.addAttribute("totalcountry",totalcountry);
+        model.addAttribute("totaltour",totaltour);
+        model.addAttribute("totaloperator",totaloperator);
+        model.addAttribute("totalreview",totalreview);
+        model.addAttribute("totalbook",totalbook);
+        System.out.println(totalcountry+    " "+totaloperator+ " "+totalreview  );
         return "/dashboard";
     }
 
@@ -128,12 +137,13 @@ public class TongaController {
 
     /** START OF OPERATOR FUNCTIONS **/
     @RequestMapping("/addOperator")
-    public String addOperatorForm() {
+    public String addOperatorForm(Model model) {
+        model.addAttribute("operator",new Country());
         return "/Operator/add-operator"; // Return the name of the JSP form file
     }
 
     @GetMapping("/saveOperator")
-    public String saveOperator(Operator operator,Model model,BindingResult bindingResult) {
+    public String saveOperator(@Valid @ModelAttribute("operator") Operator operator,Model model,BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("message", " Failed to add Country!");
@@ -243,5 +253,16 @@ public class TongaController {
         return "reviews";
     }
     /** END OF REVIEW FUNCTIONS **/
+
+/**  START OF BOOK FUNCTIONS**/
+    @GetMapping("/books")
+    public String displayBook(Model model) {
+        List<Book> books = bookService.getBooks();
+        System.out.println(books.get(0).getDestination());
+        model.addAttribute("books", books);
+
+        return "books";
+    }
+/**  END OF BOOK FUNCTIONS**/
 }
 

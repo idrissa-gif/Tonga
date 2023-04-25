@@ -3,11 +3,11 @@ package com.visitafrica.tonga.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "operator_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "operator_name"))
+@Table(name = "operator_tb")
 
 public class Operator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "operator_name")
     private String name;
@@ -23,7 +23,7 @@ public class Operator {
     private String image;
     private String description;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
