@@ -279,7 +279,7 @@
                     <h5>Offered By: ${operator.name}</h5>
 
                     <img src="/images/${operator.image}" width="70px" height="80" alt="${operator.name}"/>
-                    <p>Countries: ${operator.countries}</p>
+                    <p>Country: ${operator.country}</p>
                     <p> ${operator.description}</p>
                     <p>
                         <c:forEach var="i" begin="1" end="${tour.rate}">

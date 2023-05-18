@@ -16,6 +16,7 @@ public class User {
     private String passwordConfirm;
     private String phone ;
     private String address;
+    private String image;
     private Set < Role > roles;
 
     @Id
@@ -76,6 +77,14 @@ public class User {
         this.address = address;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
@@ -84,6 +93,7 @@ public class User {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
+
 
     @ManyToMany
     @JoinTable(name = "user_role_tb", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

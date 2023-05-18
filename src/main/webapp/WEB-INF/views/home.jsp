@@ -38,7 +38,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text"><strong>Operator:</strong> ${tour.tour_operator}</p>
-                            <p class="card-text"><strong>Countries:</strong> ${tour.countries}</p>
+                            <p class="card-text"><strong>Country:</strong> ${tour.country}</p>
                             <p class="card-text"><strong>Price:</strong> ${tour.prices} $</p>
                             <p class="card-text"><strong>No. of Persons:</strong> ${tour.number_person}</p>
                             <p class="card-text">

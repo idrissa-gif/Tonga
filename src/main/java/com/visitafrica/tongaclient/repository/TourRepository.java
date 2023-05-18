@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface TourRepository extends JpaRepository<Tour,Long> {
-    @Query("SELECT t FROM Tour t WHERE LOWER(t.countries) = LOWER(?1)")
+    @Query("SELECT t FROM Tour t WHERE LOWER(t.country) = LOWER(?1)")
     List<Tour> findByCountry(String name);
 
 

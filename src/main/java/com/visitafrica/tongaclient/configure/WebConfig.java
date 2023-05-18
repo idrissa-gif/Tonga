@@ -52,6 +52,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/reviewtour")
                 .excludePathPatterns("/bookTour/{id}")
                 .excludePathPatterns("/submitRating")
+                .excludePathPatterns("/users/{email}")
                 .excludePathPatterns("/images/**")
                 .excludePathPatterns("classpath:/images/");
 

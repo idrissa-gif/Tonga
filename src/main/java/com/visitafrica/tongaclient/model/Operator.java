@@ -3,37 +3,29 @@ package com.visitafrica.tongaclient.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "operator_tb" , uniqueConstraints = @UniqueConstraint(columnNames = "operator_name"))
+@Table(name = "operator_tb")
 
 public class Operator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "operator_name")
     private String name;
 
-    @Column(name = "number_tours")
+    @Column(name = "number_tour")
     private  String tours ;
 
-    @Column(name = "countries")
-    private String countries;
+
+    private String country;
     @Column(name = "rate")
     private Integer rate;
 
     private String image;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     private String description;
 
+    private String offices;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -57,12 +49,12 @@ public class Operator {
         this.tours = tours;
     }
 
-    public String getCountries() {
-        return countries;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountries(String countries) {
-        this.countries = countries;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Integer getRate() {
@@ -81,5 +73,19 @@ public class Operator {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOffices() {
+        return offices;
+    }
+
+    public void setOffices(String offices) {
+        this.offices = offices;
+    }
 }

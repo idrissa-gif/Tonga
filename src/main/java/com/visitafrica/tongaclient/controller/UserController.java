@@ -61,6 +61,7 @@ public class UserController {
             session.setAttribute("username",user.getUsername());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("phone", user.getPhone());
+            session.setAttribute("image",user.getImage());
             session.setAttribute("isLoggedIn", true); // add a flag to session
             return "home";
         } else {
@@ -255,7 +256,6 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> bookTour(Book book, BindingResult bindingResult, Model model, @PathVariable("id") long id, HttpSession session) {
         Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
-        System.out.println(" Hello "+isLoggedIn);
         if (isLoggedIn == null || !isLoggedIn) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -272,6 +272,19 @@ public class UserController {
 
         // Return the view for booking confirmation
         return ResponseEntity.ok(book);
+    }
+
+    @GetMapping("/users/{email}")
+    @ResponseBody
+    public ResponseEntity<User> getUserById(@PathVariable("email") String email) {
+
+        User user = userService.getbyEmail(email);
+
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

@@ -12,7 +12,7 @@ public class Tour {
     private String tour_name ;
     private String description;
     private String tour_operator;
-    private String countries;
+    private String country;
     private String prices;
     private String number_person;
     private Integer rate ;
@@ -53,12 +53,12 @@ public class Tour {
         this.tour_operator = tour_operator;
     }
 
-    public String getCountries() {
-        return countries;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountries(String countries) {
-        this.countries = countries;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPrices() {
