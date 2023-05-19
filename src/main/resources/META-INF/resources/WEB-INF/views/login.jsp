@@ -18,13 +18,16 @@
         .form-heading {
             text-align: center;
         }
+
         body {
+            background-image: url("https://www.w3schools.com/w3images/mountains.jpg");
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             height: 100vh;
             overflow: hidden;
         }
+
 
         .container {
             background-color: rgb(228, 238, 235);
@@ -33,11 +36,11 @@
             margin-top: 200px;
         }
 
-         .login-btn {
-             margin-top: 20px;
-             margin-left: 500px;
-             font-size: 14px;
-         }
+        .login-btn {
+            margin-top: 20px;
+            margin-left: 500px;
+            font-size: 14px;
+        }
 
         .form-signin .form-heading,
         .form-signin input[type="text"],
@@ -46,6 +49,17 @@
             margin-bottom: 20px;
         }
 
+        .forgot-password-link {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        /* Style for the logo */
+        .mb-4 {
+            margin-bottom: 2rem!important;
+        }
+
+
     </style>
 
 </head>
@@ -53,7 +67,9 @@
 <body>
 
 <div class="container">
-    <h2 class="form-heading">Log in</h2>
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
+    </div>
 
     <form method="POST" th:th:action="@{/login}" class="form-signin">
         <div class="form-group ${error != null ? 'has-error' : ''}">
@@ -63,11 +79,14 @@
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span><br>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
+            <a href="#" class="forgot-password-link">Forgot Password?</a>
+            <br>
             <button class="btn btn-lg btn-primary login-btn" type="submit">Log In</button>
+
         </div>
     </form>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

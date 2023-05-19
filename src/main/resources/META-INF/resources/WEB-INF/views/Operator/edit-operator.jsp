@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,13 +20,15 @@
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="${operator.name}">
         </div>
+
         <div class="form-group">
-            <label for="tours">Number of Tours</label>
-            <input type="text" class="form-control" id="tours" name="tours" value="${operator.tours}">
-        </div>
-        <div class="form-group">
-            <label for="countries">Countries</label>
-            <input type="text" class="form-control" id="countries" name="countries" value="${operator.countries}">
+            <label for="country">Countries</label>
+            <select id="country" name="country" class="form-control">
+                <option value="${operator.country}">${operator.country}</option>
+                <c:forEach items="${countries}" var="country">
+                    <option value="${country.name}">${country.name}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="form-group">
             <label for="rate">Rate</label>

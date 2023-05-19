@@ -22,14 +22,7 @@
             <label for="name">Country Name</label>
             <input type="text" class="form-control" id="name" name="name" value="${country.name}">
         </div>
-        <div class="form-group">
-            <label for="tours">Tours</label>
-            <input type="number" class="form-control" id="tours" name="tours" value="${country.tours}">
-        </div>
-        <div class="form-group">
-            <label for="operators">Operators</label>
-            <input type="number" class="form-control" id="operators" name="operators" value="${country.operators}">
-        </div>
+
         <div class="form-group">
             <label for="image">Image</label><br>
             <img src="/images/${country.image}" alt="Country Image" class="img-thumbnail" width="200" height="200">
@@ -53,9 +46,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<footer>
-    <div>
-        <jsp:include page="../includes/footer.jsp"/>
-    </div>
-</footer>
+
 </html>

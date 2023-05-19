@@ -20,17 +20,11 @@
             <label for="name">Country Name:</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
-        <div class="form-group">
-            <label for="tours">Number of Tours:</label>
-            <input type="number" class="form-control" id="tours" name="tours" required>
-        </div>
-        <div class="form-group">
-            <label for="operators">Number of Operators:</label>
-            <input type="number" class="form-control" id="operators" name="operators" required>
-        </div>
+
         <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" class="form-control" id="image" name="image" required>
+            <br>
         </div>
         <button type="submit" class="btn btn-primary">Add Country</button>
     </form>

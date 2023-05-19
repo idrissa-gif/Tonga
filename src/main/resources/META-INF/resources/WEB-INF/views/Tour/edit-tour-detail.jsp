@@ -1,11 +1,16 @@
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Tour</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
-
+    <style>
+        .container {
+            padding-bottom: 70px; /* adjust the value as needed */
+        }
+    </style>
 </head>
 <body>
 <div style="margin-bottom: 5%;">
@@ -25,12 +30,23 @@
         </div>
         <div class="mb-3">
             <label for="tour_operator" class="form-label">Tour Operator</label>
-            <input type="text" class="form-control" id="tour_operator" name="tour_operator" value="${tour.tour_operator}">
+            <select class="form-control" id="tour_operator" name="tour_operator">
+                <option value="">${tour.tour_operator}</option>
+                <c:forEach var="operator" items="${operators}">
+                    <option value="${operator.name}" >${operator.name}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="mb-3">
-            <label for="countries" class="form-label">Countries</label>
-            <input type="text" class="form-control" id="countries" name="countries" value="${tour.countries}">
+            <label for="country" class="form-label">Country</label>
+            <select class="form-control" id="country" name="country">
+                <option value="">${tour.country}</option>
+                <c:forEach var="country" items="${countries}">
+                    <option value="${country.name}">${country.name}</option>
+                </c:forEach>
+            </select>
         </div>
+
         <div class="mb-3">
             <label for="prices" class="form-label">Prices</label>
             <input type="text" class="form-control" id="prices" name="prices" value="${tour.prices}">

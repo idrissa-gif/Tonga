@@ -40,7 +40,7 @@
                 <td>${operator.id}</td>
                 <td>${operator.name}</td>
                 <td>${operator.tours}</td>
-                <td>${operator.countries}</td>
+                <td>${operator.country}</td>
                 <td>${operator.rate}</td>
                 <td><img src="/images/${operator.image}" alt="${operator.name} Image" style="max-width: 100px; max-height: 100px;" \></td>
                 <td>

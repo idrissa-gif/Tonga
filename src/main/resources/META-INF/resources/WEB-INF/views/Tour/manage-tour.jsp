@@ -46,7 +46,7 @@
                 <th scope="row">${status.index + 1}</th>
                 <td>${tour.tour_name}</td>
                 <td>${tour.tour_operator}</td>
-                <td>${tour.countries}</td>
+                <td>${tour.country}</td>
                 <td>${tour.prices}</td>
                 <td>${tour.number_person}</td>
                 <td>${tour.rate}</td>
@@ -54,8 +54,8 @@
                 <td><img src="/images/${tour.image2}" alt="${tour.tour_name} Image" style="max-width: 100px; max-height: 100px;"></td>
                 <td><img src="/images/${tour.image3}" alt="${tour.tour_name} Image" style="max-width: 100px; max-height: 100px;"></td>
                 <td>
-                    <a href="/editTour?tour_id=${tour.id}" class="btn btn-sm btn-primary">Edit</a>
-                    <a href="/deleteTour?tour_id=${tour.id}" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="/editTour?tour_id=${tour.id}" class="btn btn-sm btn-primary" style="width: 100px;">Edit</a>
+                    <a href="/deleteTour?tour_id=${tour.id}" class="btn btn-sm btn-danger" style="width: 100px">Delete</a>
                 </td>
             </tr>
         </c:forEach>

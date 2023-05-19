@@ -72,7 +72,7 @@
     </div>
 
 </div>
-<div class="fixed-bottom">
+<div class="fixed-bottom" style="margin-top:20px">
     <jsp:include page="includes/footer.jsp"/>
 </div>
 </body>

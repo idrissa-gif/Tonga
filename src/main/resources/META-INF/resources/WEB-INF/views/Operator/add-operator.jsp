@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,21 +21,26 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="tours" class="col-sm-2 col-form-label">Tours:</label>
+            <label for="country" class="col-sm-2 col-form-labe">Country</label>
             <div class="col-sm-10">
-                <input type="text" id="tours" name="tours" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="countries" class="col-sm-2 col-form-label">Countries:</label>
-            <div class="col-sm-10">
-                <input type="text" id="countries" name="countries" class="form-control">
+                <select id="country" name="country" class="form-control">
+                    <option value="">Select Country</option>
+                    <c:forEach items="${countries}" var="country">
+                        <option value="${country.name}">${country.name}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label for="rate" class="col-sm-2 col-form-label">Rate:</label>
             <div class="col-sm-10">
                 <input type="number" id="rate" name="rate" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="offices" class="col-sm-2 col-form-label">Offices:</label>
+            <div class="col-sm-10">
+                <input type="text" id="offices" name="offices" class="form-control">
             </div>
         </div>
         <div class="form-group row">

@@ -92,6 +92,8 @@ public class TongaController {
             model.addAttribute("message", " Failed to add Country!");
             return "/Country/add-country"; // Return back to the form if validation fails
         }
+        country.setOperators(0);
+        country.setTours(0);
 
         countryService.addCountry(country); // Call the service to add the country to the database
 
@@ -101,8 +103,8 @@ public class TongaController {
 
     @GetMapping("/manage-country")
     public String manageCountry(Model model){
-        List<Country> tours = countryService.findCountries();
-        model.addAttribute("countries", tours);
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("countries", countryList);
         return "/Country/manage-country";
     }
 
@@ -139,6 +141,8 @@ public class TongaController {
     @RequestMapping("/addOperator")
     public String addOperatorForm(Model model) {
         model.addAttribute("operator",new Country());
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("countries",countryList);
         return "/Operator/add-operator"; // Return the name of the JSP form file
     }
 
@@ -149,6 +153,7 @@ public class TongaController {
             model.addAttribute("message", " Failed to add Country!");
             return "/Operator/add-operator"; // Return back to the form if validation fails
         }
+        operator.setTours("0");
         operatorService.saveOperator(operator); // Call the service to save the Operator object
 
         model.addAttribute("message", "Operator added successfully!"); // Add success message to model
@@ -159,6 +164,9 @@ public class TongaController {
     public String manageOperator(Model model)
     {
         List<Operator> operatorList = operatorService.findOperators();
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("countries",countryList);
+
         model.addAttribute("operators", operatorList);
         return "/Operator/manage-operator";
     }
@@ -166,8 +174,10 @@ public class TongaController {
     public String editOperator(@RequestParam("id") Long operator_id, Model model) {
         // Retrieve the operator information by ID from the service
         Operator operator = operatorService.getOperatorById(operator_id);
-
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("countries",countryList);
         // Add the operator object to the model to be passed to the view
+
         model.addAttribute("operator", operator);
 
         // Return the view name for the edit operator page
@@ -177,7 +187,9 @@ public class TongaController {
     public String updateOperator(@ModelAttribute("operator") Operator operator, Model model) {
         // Call the service to update the operator in the database
         operatorService.updateOperator(operator);
-
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("countries",countryList);
+        model.addAttribute("operator", operator);
         model.addAttribute("message", "Operator updated successfully!"); // Add success message to model
         return "/Operator/edit-operator"; // Redirect to the addOperator form after saving
     }
@@ -186,7 +198,11 @@ public class TongaController {
     /**START OF TOUR FUNCTIONS**/
     @RequestMapping("/showaddform")
 
-    public String showTourForm() {
+    public String showTourForm(Model model) {
+        List<Operator> operatorList = operatorService.findOperators();
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("operators",operatorList);
+        model.addAttribute("countries",countryList);
         return "/Tour/add-tour";
     }
 
@@ -197,6 +213,7 @@ public class TongaController {
             model.addAttribute("message", " Failed to add Tour!");
             return "/Tour/add-tour"; // Return back to the form if validation fails
         }
+        System.out.println(tour.getTour_operator());
         tourService.saveTour(tour); // Call the service to save the Tour object
 
         model.addAttribute("message", "Tour added successfully!"); // Add success message to model
@@ -215,7 +232,6 @@ public class TongaController {
     {
         List<Tour> tourList = tourService.findTours();
         for (int i = 0; i < tourList.size(); i++) {
-            System.out.println(tourList.get(i).getCountries());
             if(tour_id==tourList.get(i).getId()){
                 tourService.Delete(tourList.get(i));
             }
@@ -236,6 +252,10 @@ public class TongaController {
     @GetMapping("/editTour")
     public String editTour(@RequestParam("tour_id") long tour_id,Model model){
         Tour tour = tourService.findTourById(tour_id);
+        List<Operator> operatorList = operatorService.findOperators();
+        List<Country> countryList = countryService.findCountries();
+        model.addAttribute("operators",operatorList);
+        model.addAttribute("countries",countryList);
         model.addAttribute("tour", tour);
         return "/Tour/edit-tour-detail";
     }
@@ -258,11 +278,18 @@ public class TongaController {
     @GetMapping("/books")
     public String displayBook(Model model) {
         List<Book> books = bookService.getBooks();
-        System.out.println(books.get(0).getDestination());
         model.addAttribute("books", books);
 
         return "books";
     }
 /**  END OF BOOK FUNCTIONS**/
+
+//@ExceptionHandler(Exception.class)
+//public String handleException(Exception ex, HttpServletRequest request) {
+//    String url = request.getRequestURI();
+//    return "redirect:books";
+//}
+
+
 }
 

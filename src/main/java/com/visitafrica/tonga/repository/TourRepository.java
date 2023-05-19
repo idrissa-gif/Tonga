@@ -15,13 +15,11 @@ import javax.persistence.PersistenceContext;
 @Repository
 public interface TourRepository extends JpaRepository<Tour,Long> {
 
-
-
     @Override
     void delete(Tour tour);
     @Modifying
-    @Query("UPDATE Tour t SET t.tour_name = :tourName, t.description = :description, t.tour_operator = :tourOperator, t.countries = :countries, t.prices = :prices, t.rate = :rate, t.image1 = :image1, t.image2 = :image2, t.image3 = :image3 WHERE t.id = :id")
+    @Query("UPDATE Tour t SET t.tour_name = :tourName, t.description = :description, t.tour_operator = :tourOperator, t.country = :country, t.prices = :prices, t.rate = :rate, t.image1 = :image1, t.image2 = :image2, t.image3 = :image3 WHERE t.id = :id")
     @Transactional
-    void updateTour(@Param("id") Long id, @Param("tourName") String tourName, @Param("description") String description, @Param("tourOperator") String tourOperator, @Param("countries") String countries, @Param("prices") String prices, @Param("rate") Integer rate, @Param("image1") String image1, @Param("image2") String image2, @Param("image3") String image3);
+    void updateTour(@Param("id") Long id, @Param("tourName") String tourName, @Param("description") String description, @Param("tourOperator") String tourOperator, @Param("country") String countries, @Param("prices") String prices, @Param("rate") Integer rate, @Param("image1") String image1, @Param("image2") String image2, @Param("image3") String image3);
 
 }

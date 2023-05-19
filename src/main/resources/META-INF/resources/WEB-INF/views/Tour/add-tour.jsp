@@ -1,9 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Add Tour</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+    <style>
+        .container {
+            padding-bottom: 70px; /* adjust the value as needed */
+        }
+
+    </style>
 </head>
 <body>
 <div style="margin-bottom: 5%;">
@@ -20,14 +27,27 @@
             <label for="description" class="form-label">Description</label>
             <input type="text" class="form-control" id="description" name="description">
         </div>
+
         <div class="mb-3">
             <label for="tour_operator" class="form-label">Tour Operator</label>
-            <input type="text" class="form-control" id="tour_operator" name="tour_operator">
+            <select class="form-control" id="tour_operator" name="tour_operator">
+                <option value="">Select Tour Operator</option>
+                <c:forEach items="${operators}" var="operator">
+                    <option value="${operator.name}">${operator.name}</option>
+                </c:forEach>
+            </select>
         </div>
+
         <div class="mb-3">
-            <label for="countries" class="form-label">Countries</label>
-            <input type="text" class="form-control" id="countries" name="countries">
+            <label for="country" class="form-label">Country</label>
+            <select class="form-control" id="country" name="country">
+                <option value="">Select Country</option>
+                <c:forEach items="${countries}" var="country">
+                    <option value="${country.name}">${country.name}</option>
+                </c:forEach>
+            </select>
         </div>
+
         <div class="mb-3">
             <label for="prices" class="form-label">Prices</label>
             <input type="text" class="form-control" id="prices" name="prices">
@@ -37,7 +57,7 @@
             <input type="text" class="form-control" id="number_person" name="number_person">
         </div>
         <div class="mb-3">
-            <label for="rate" class="form-label">Rate</label>
+            <label for="rate" class="form-label">Rating</label>
             <input type="number" class="form-control" id="rate" name="rate">
         </div>
         <div class="mb-3">

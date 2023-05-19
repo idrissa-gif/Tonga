@@ -1,0 +1,12 @@
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -70px; /* negative margin equal to footer height */
+}
+
+.footer {
+    height: 70px;
+}
