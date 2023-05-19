@@ -15,7 +15,7 @@
 
   <style>
     body {
-      background-image: url('/images/login_background.jpeg');
+      background-image: url('${pageContext.request.contextPath}/images/login_background_tr.png');
       background-size: cover;
       background-position: center;
     }
@@ -70,6 +70,7 @@
     </div>
   </form>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

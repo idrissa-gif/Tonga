@@ -12,6 +12,16 @@
     <title>User Registration</title>
     <!-- Add Bootstrap CSS link here -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('${pageContext.request.contextPath}/images/signup_background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+
+    </style>
 </head>
 <body>
 <div class="container mt-5">
