@@ -12,6 +12,7 @@
 <head>
     <title>Country List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/country.css">
 </head>
 <body>
 <%--header--%>
@@ -24,10 +25,12 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <!-- Display country image, name, tours, and operators in the card -->
-                    <img src="/images/${country.image}" class="card-img-top" alt="Country Image">
-                    <div class="card-body text-center">
+                    <div class ="im">
+                        <img src="/images/${country.image}" class="card-img-top" alt="Country Image">
                         <h3 class="card-title">${country.name}</h3>
+                    </div>
 
+                    <div class="card-body text-center">
                         <!-- Add an "Explore" button with a link to the country details page -->
                         <a href="/explorecountry/${country.name}" class="btn btn-primary">Explore</a>
                     </div>
@@ -40,8 +43,7 @@
 <jsp:include page="footer.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+c   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

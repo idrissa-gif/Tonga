@@ -23,5 +23,9 @@ public class TourService {
     public List<Tour> findToursByCountryName(String name){
         return tourRepository.findByCountry(name);
     }
+
+    public List<Tour> findToursBySearch(String search) {
+        return tourRepository.findBySearch(search);
+    }
 }
 

@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <!-- Logo Image -->
-        <img src="${pageContext.request.contextPath}/images/logo/TONGA.png" alt="Logo" width="50" height="50">
+        <img src="${pageContext.request.contextPath}/images/logo/logo_image.png" alt="Logo" width="50" height="50">
     </a>
     <!-- Toggle button for small screens -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -32,6 +32,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0"  action="${pageContext.request.contextPath}/search" method="GET">
+                    <input class="form-control mr-sm-2" name = "search" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="homeLink" href="/welcome">Home</a>
             </li>
             <li class="nav-item">
@@ -39,6 +44,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="destinationLink" href="/country">Destination</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="suggestedLink" href="/suggestPlace">Suggest Place</a>
             </li>
             <% if (session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) { %>
             <li class="nav-item dropdown">

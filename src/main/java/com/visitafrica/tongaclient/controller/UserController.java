@@ -4,6 +4,8 @@ import com.visitafrica.tongaclient.model.*;
 import com.visitafrica.tongaclient.service.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import java.util.*;
 
 @Controller
 public class UserController {
+
     @Autowired
     private BookService bookingService;
     @Autowired
@@ -32,6 +35,8 @@ public class UserController {
     private HttpSession session;
     @Autowired
     private ReviewService reviewService;
+
+
 
     @GetMapping("/map")
     public String map() {
@@ -87,6 +92,7 @@ public class UserController {
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
         List<Tour> tourList = tourService.findTours();
+        Pageable pageable = PageRequest.of(0, 20);
         model.addAttribute("tourList", tourList);
         return "home";
     }
@@ -286,6 +292,30 @@ public class UserController {
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam(value = "search", required = false) String search) {
+        List<Tour> tourList;
+        if (search != null && !search.isEmpty()) {
+            tourList = tourService.findToursBySearch(search);
+        } else {
+            tourList = Collections.emptyList(); // or any default value if needed
+        }
+        model.addAttribute("tourList", tourList);
+        return "search";
+    }
+
+    /**Suggest place**/
+    @GetMapping("/suggestPlace")
+    public String suggest(Model model, @RequestParam(value = "search", required = false) String search) {
+        return "suggestPlace";
+    }
+    @GetMapping("/AddsuggestPlace")
+    public String AddsuggestPlace(Model model) {
+        return "AddsuggestPlaces";
+    }
+
 
 }
 

@@ -17,6 +17,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div style="position: relative;">
-                            <img src="/images/${tour.image1}" alt="${tour.tour_name}" class="card-img-top">
+                            <img src="/images/${tour.image3}" alt="${tour.tour_name}" class="card-img-top">
                             <h5 class="card-title" style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 10px; background-color: rgba(0,0,0,0.7); color: #fff; padding: 10px; text-align: center; z-index: 1;">${tour.tour_name}</h5>
                         </div>
                         <div class="card-body">
@@ -41,11 +42,11 @@
                             <p class="card-text"><strong>Country:</strong> ${tour.country}</p>
                             <p class="card-text"><strong>Price:</strong> ${tour.prices} $</p>
                             <p class="card-text"><strong>No. of Persons:</strong> ${tour.number_person}</p>
-                            <p class="card-text">
+                           <%-- <p class="card-text">
                                 <c:forEach var="i" begin="1" end="${tour.rate}">
-                                    <span class="fa fa-star" aria-hidden="true" style="color: gold;"></span>
+                                    <i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>
                                 </c:forEach>
-                            </p>
+                            </p>--%>
                             <div class="text-center">
                                 <a href="/DetailTourView/${tour.id}" class="btn btn-primary btn-sm">More</a>
                             </div>

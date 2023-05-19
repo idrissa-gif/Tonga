@@ -1,0 +1,110 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+
+}
+
+.card {
+    position: relative;
+}
+.card .explore-button{
+
+    margin-top:auto;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.im{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.card-img-top {
+    width: 350px;
+    height: 300px;
+    max-width: 350px;
+    max-height: 300px;
+    object-fit: cover;
+}
+.card-footer {
+    margin-top: auto;
+}
+
+.card .card-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    z-index: 1;
+}
+
+
+/* Style the form */
+.form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Style the form heading */
+.form-heading {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Style the form inputs */
+.form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.card .btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+}
+
+
+/* Style the form buttons */
+.btn {
+
+
+}
+
+/* Style the primary button */
+.btn-primary {
+    background-color: #ff7e5f;
+    color: #fff;
+}
+
+/* Style the secondary button */
+.btn-secondary {
+    background-color: #feb47b;
+    color: #fff;
+}
+
+/* Style the error message */
+.has-error span {
+    color: #dc3545;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
