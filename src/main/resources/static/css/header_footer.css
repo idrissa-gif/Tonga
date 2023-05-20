@@ -1,27 +1,26 @@
-.navbar,
-.navbar-brand,
-.navbar-toggler,
-.collapse,
-.navbar-nav,
-.nav-item,
-.nav-link,
-.dropdown-menu,
-.dropdown-item  {
+.navbar {
     background-color: lightgrey;
     color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
+
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus,
 .navbar-nav .nav-link.active {
     color: white;
     background-color: lightskyblue;
 }
+
 .navbar-nav {
     margin-left: auto;
 }
 
 .navbar-nav .nav-item {
-    margin-right: 5px; /* Adjust the spacing between items as desired */
+    margin-right: 5px;
 }
 
 .navbar-nav .nav-link {
@@ -29,24 +28,16 @@
     padding-right: 0;
 }
 
-
-/*
-footer
-*/
-
-footer {
-    background-color: lightgrey;
-    color: #FFFFFF;
+body {
+    padding-top: 70px; /* Adjust this value to set the top spacing for the page content */
 }
-
-footer h3 {
-    color: #FFFFFF;
+.navbar-form{
+    display:flex;
+    align-items: center;
 }
-
-footer p {
-    color: #FFFFFF;
-}
-
-footer .social-icons a i {
-    color: white;
+.user-profile-icon img {
+padding-bottom: 20px;
+width: 30px; /* Adjust the size as desired */
+height: 30px; /* Adjust the size as desired */
+border-radius: 50%;
 }

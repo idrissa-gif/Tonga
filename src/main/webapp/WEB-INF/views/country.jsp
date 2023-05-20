@@ -25,10 +25,10 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <!-- Display country image, name, tours, and operators in the card -->
-                    <div class ="im">
+
                         <img src="/images/${country.image}" class="card-img-top" alt="Country Image">
                         <h3 class="card-title">${country.name}</h3>
-                    </div>
+
 
                     <div class="card-body text-center">
                         <!-- Add an "Explore" button with a link to the country details page -->

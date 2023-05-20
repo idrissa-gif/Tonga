@@ -7,36 +7,32 @@
 }
 
 .card {
-    position: relative;
-}
-.card .explore-button{
-
-    margin-top:auto;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.im{
-    position: relative;
+    display: flex;
+    width: 350px;
+    max-width: 100%;
+    height: 300px;
+    flex: 0 0 0;
+    flex-direction: column;
+    justify-content: space-between;
     margin-bottom: 30px;
+    position: absolute;
+    align-items: center;
 }
+
 
 .card-img-top {
+    flex: 1;
     width: 350px;
-    height: 300px;
-    max-width: 350px;
-    max-height: 300px;
+    height: 250px;
     object-fit: cover;
 }
-.card-footer {
-    margin-top: auto;
+.card-body{
 }
 
-.card .card-title {
+.card-title {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 60%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     text-align: center;
@@ -85,8 +81,14 @@
 
 /* Style the form buttons */
 .btn {
-
-
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
 }
 
 /* Style the primary button */
@@ -108,3 +110,4 @@
     font-weight: bold;
     margin-top: 10px;
 }
+

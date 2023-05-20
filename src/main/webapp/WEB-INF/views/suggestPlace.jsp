@@ -14,6 +14,7 @@
     <title>Suggest a Place</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/suggest.css"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
