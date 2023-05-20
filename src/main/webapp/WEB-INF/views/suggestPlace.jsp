@@ -16,13 +16,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <div class="container">
     <h1 class="mt-4">Suggest a Place</h1>
-    <form action="suggestPlaces" method="GET">
+    <form action="/AddsuggestPlace" method="GET">
         <div class="mb-3">
             <label for="title" class="form-label">Title:</label>
             <input type="text" class="form-control" name="title" id="title" required>
         </div>
+        <div class="mb-3">
+            <label for="userEmail" class="form-label">User Email:</label>
+            <input type="text" class="form-control" name="userEmail" id="userEmail" value="${sessionScope.email}" readonly>
+        </div>
+
         <div class="mb-3">
             <label for="country" class="form-label">Country:</label>
             <input type="text" class="form-control" name="country" id="country" required>
@@ -48,6 +54,21 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+<div>
+    <jsp:include page="footer.jsp"/>
+</div>
+
+
+<script>
+    // Check if the success message is present in the session
+    const suggestionSuccess = ${sessionScope.suggestionSuccess};
+    if (suggestionSuccess) {
+        // Display the success message in a popup window
+        alert("Tour Suggestion Submitted Successfully");
+        // Remove the success message from the session
+        <% session.removeAttribute("suggestionSuccess"); %>
+    }
+</script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

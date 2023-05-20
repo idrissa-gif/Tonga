@@ -1,2 +1,4 @@
-package com.visitafrica.tongaclient.model;public class Rate {
+package com.visitafrica.tongaclient.model;
+
+public class Rate {
 }

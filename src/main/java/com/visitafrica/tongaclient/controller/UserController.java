@@ -35,6 +35,8 @@ public class UserController {
     private HttpSession session;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private TourSuggestionService tourSuggestionService;
 
 
 
@@ -312,8 +314,11 @@ public class UserController {
         return "suggestPlace";
     }
     @GetMapping("/AddsuggestPlace")
-    public String AddsuggestPlace(Model model) {
-        return "AddsuggestPlaces";
+    public String AddsuggestPlace(@ModelAttribute("tourSuggestion") TourSuggestion tourSuggestion,HttpSession session) {
+
+        tourSuggestionService.save(tourSuggestion);
+        session.setAttribute("suggestionSuccess", true);
+        return "redirect:/suggestPlace";
     }
 
 

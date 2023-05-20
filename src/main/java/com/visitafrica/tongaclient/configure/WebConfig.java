@@ -19,7 +19,9 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/images/**") // URL pattern to access the images
-                .addResourceLocations("classpath:/images/"); // Location of the images directory
+                .addResourceLocations("classpath:/images/") // Location of the images directory
+                .addResourceLocations("classpath:/css")
+                .addResourceLocations("classpath:/js");
     }
 
     @Override
@@ -54,7 +56,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/submitRating")
                 .excludePathPatterns("/users/{email}")
                 .excludePathPatterns("/images/**")
-                .excludePathPatterns("classpath:/images/");
+                .excludePathPatterns("classpath:/images/")
+                .excludePathPatterns("/css/**")
+                .excludePathPatterns("classpath:/css/")
+                .excludePathPatterns("/js/**");
 
         // Exclude signup endpoint from optional login
         // Add other endpoints to be excluded from optional login as needed

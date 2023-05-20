@@ -1,12 +1,5 @@
+
 <%--
-  Created by IntelliJ IDEA.
-  User: idrissamahamoudoudicko
-  Date: 19/5/2023
-  Time: 10:52
-  To change this template use File | Settings | File Templates.
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.visitafrica.tongaclient.model.Tour" %><%--
   Created by IntelliJ IDEA.
   User: idrissamahamoudoudicko
   Date: 16/4/2023
