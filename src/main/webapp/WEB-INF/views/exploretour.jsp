@@ -7,73 +7,13 @@
     <!-- Include Bootstrap CSS and JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <style>
-        /* Reset some default table styles */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        /* Add some spacing and background color to table header */
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Add hover effect on table rows */
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        /* Add borders to table rows */
-        tr:not(:last-child) {
-            border-bottom: 1px solid #ddd;
-        }
-
-        /* Add responsive styles for small screens */
-        @media screen and (max-width: 768px) {
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            th, td {
-                display: inline-block;
-                vertical-align: top;
-                border-bottom: none;
-                border-right: 1px solid #ddd;
-            }
-
-            th {
-                min-width: 100px;
-            }
-
-            td {
-                width: 100%;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            tr:not(:last-child) {
-                border-bottom: none;
-            }
-
-            tr:last-child td {
-                border-bottom: 1px solid #ddd;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/explore.css">
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<div>
+    <jsp:include page="header.jsp"/>
+</div>
+<section class="bg-light py-5">
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
@@ -433,8 +373,6 @@
 </script>
 
 
-
-
-
+</section>
 </body>
 </html>

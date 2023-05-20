@@ -15,13 +15,13 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<%--
+
     <link rel="stylesheet" href="css/header_footer.css"/>
---%>
+
 </head>
-<body>
+<body class="header">
 <!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg text-white">
     <a class="navbar-brand" href="#">
         <!-- Logo Image -->
         <img src="${pageContext.request.contextPath}/images/logo/logo_image.png" alt="Logo" width="50" height="50">
@@ -56,7 +56,7 @@
             <li class="nav-item dropdown">
                 <button class="btn btn-link dropdown-toggle" type="button" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!-- User Profile Icon Image -->
-                    <img src="${pageContext.request.contextPath}/images/${sessionScope.image}" alt="${pageContext.request.contextPath}/images/" width="25" height="25">
+                    <img src="${pageContext.request.contextPath}/images/${sessionScope.image}" alt="${sessionScope.username}" width="25" height="25">
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#"  id="userProfileBtn"  data-toggle="modal" data-target="#userProfileModal">${sessionScope.username}</a>

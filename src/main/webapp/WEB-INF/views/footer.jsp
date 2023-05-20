@@ -6,14 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<%--<link rel="stylesheet" href="css/header_footer.css"/>--%>
+<link rel="stylesheet" href="css/header_footer.css"/>
 <html>
 
 
 <body>
 <footer>
 
-    <div class="container">
+    <div class="container footer-page" style="color: white">
         <div class="row">
             <div class="col-md-4">
                 <h3>About Us</h3>

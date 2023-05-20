@@ -78,20 +78,6 @@
     height: 30px;
 }
 
-
-/* Style the form buttons */
-.btn {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 20px;
-}
-
-/* Style the primary button */
 .btn-primary {
     background-color: #ff7e5f;
     color: #fff;

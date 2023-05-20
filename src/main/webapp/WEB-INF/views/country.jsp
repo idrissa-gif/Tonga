@@ -14,10 +14,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/country.css">
 </head>
+
+
 <body>
 <%--header--%>
-<jsp:include page="header.jsp"/>
-<div class="container mt-5">
+<div>
+    <jsp:include page="header.jsp"/>
+</div>
+<section class="bg-light py-5">
+    <div class="container mt-5" >
     <div class="row">
 
         <!-- Iterate through the list of countries and create a Bootstrap card for each country -->
@@ -40,10 +45,12 @@
 
     </div>
 </div>
+</section>
+
 <jsp:include page="footer.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-c   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

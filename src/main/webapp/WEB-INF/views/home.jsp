@@ -21,13 +21,17 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
-<div class="banner">
-    <h1 class="text-center">Tonga Welcomes you to Africa</h1>
-    <p class="text-center">Your ultimate guide to exploring the stunning continent of Africa. Our mission is to help you discover the best of Africa's natural beauty, diverse cultures, and unforgettable experiences. From majestic safaris to breathtaking landscapes, we provide expert recommendations and insider tips to help you plan your perfect African adventure. Join us as we explore the wonders of Africa and create memories that will last a lifetime.</p>
+<div>
+    <jsp:include page="header.jsp"/>
 </div>
+
+
 <!-- Tour section -->
 <section class="bg-light py-5">
+    <div class="banner">
+        <h1 class="text-center">Tonga Welcomes you to Africa</h1>
+        <p class="text-center">Your ultimate guide to exploring the stunning continent of Africa. Our mission is to help you discover the best of Africa's natural beauty, diverse cultures, and unforgettable experiences. From majestic safaris to breathtaking landscapes, we provide expert recommendations and insider tips to help you plan your perfect African adventure. Join us as we explore the wonders of Africa and create memories that will last a lifetime.</p>
+    </div>
     <div class="container">
         <div class="row mt-4">
             <c:forEach var="tour" items="${tourList}">
@@ -61,7 +65,6 @@
 
 </section>
 
-</div>
 
 <jsp:include page="footer.jsp"/>
 <!-- Add Bootstrap and jQuery scripts -->
