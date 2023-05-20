@@ -11,9 +11,9 @@
 
 
 <body>
-<footer>
+<footer class="footer bg-dark text-light">
 
-    <div class="container footer-page" style="color: white">
+    <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <h3>About Us</h3>

@@ -21,7 +21,7 @@
 </head>
 <body class="header">
 <!-- Header -->
-<nav class="navbar navbar-expand-lg text-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">
         <!-- Logo Image -->
         <img src="${pageContext.request.contextPath}/images/logo/logo_image.png" alt="Logo" width="50" height="50">
