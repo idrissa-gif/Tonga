@@ -150,7 +150,7 @@
                     <table>
                         <thead><b>Rates per Person</b></thead>
                         <tr>
-                            <th colspan="2">Start date</th>
+                            <th colspan="2">Date</th>
                             <th>Single</th>
                             <th>2 people</th>
                             <th>3 people</th>
@@ -159,22 +159,22 @@
                             <th>6 people</th>
                         </tr>
                         <tr>
-                            <td colspan="2"><?php echo $row2['starting_date'] ?></td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
+                            <td colspan="2">Start: ${rate.starting_date}</td>
+                            <td>$ ${rate.price_unit +50}</td>
+                            <td>$ ${rate.price_unit + 100}</td>
+                            <td>$ ${rate.price_unit + 150}</td>
+                            <td>$ ${rate.price_unit + 200}</td>
+                            <td>$ ${rate.price_unit + 225}</td>
+                            <td>$ ${rate.price_unit + 250}</td>
                         </tr>
                         <tr>
-                            <td colspan="2"></td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
-                            <td>$</td>
+                            <td colspan="2">End: ${rate.ending_date}</td>
+                            <td>$ ${rate.price_unit + 60}</td>
+                            <td>$ ${rate.price_unit + 150}</td>
+                            <td>$ ${rate.price_unit + 170}</td>
+                            <td>$ ${rate.price_unit + 230}</td>
+                            <td>$ ${rate.price_unit + 250}</td>
+                            <td>$ ${rate.price_unit + 290}</td>
                         </tr>
 
                     </table>

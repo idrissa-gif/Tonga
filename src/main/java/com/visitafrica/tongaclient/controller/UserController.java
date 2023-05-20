@@ -37,6 +37,8 @@ public class UserController {
     private ReviewService reviewService;
     @Autowired
     private TourSuggestionService tourSuggestionService;
+    @Autowired
+    private RateService rateService;
 
 
 
@@ -156,6 +158,8 @@ public class UserController {
         Operator operator = operatorService.findByName(tour.get().getTour_operator());
         model.addAttribute("operator",operator);
 
+        Rate rate = rateService.find(); // Replace with your actual service method to retrieve
+        model.addAttribute("rate",rate);
         return "exploretour";
     }
 
@@ -300,8 +304,11 @@ public class UserController {
     public String search(Model model, @RequestParam(value = "search", required = false) String search) {
         List<Tour> tourList;
         if (search != null && !search.isEmpty()) {
+
             tourList = tourService.findToursBySearch(search);
+            System.out.println(tourList.size());
         } else {
+            System.out.println("____________-----------------Hello Empty___----------------------------------------------------------------");
             tourList = Collections.emptyList(); // or any default value if needed
         }
         model.addAttribute("tourList", tourList);
@@ -320,6 +327,7 @@ public class UserController {
         session.setAttribute("suggestionSuccess", true);
         return "redirect:/suggestPlace";
     }
+
 
 
 }

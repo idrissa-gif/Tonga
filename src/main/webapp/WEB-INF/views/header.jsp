@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="css/header_footer.css"/>--%>
 </head>
 <body>
 <!-- Header -->
@@ -29,13 +30,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Navbar items -->
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0"  action="${pageContext.request.contextPath}/search" method="GET">
-                    <input class="form-control mr-sm-2" name = "search" type="search" placeholder="Search" aria-label="Search">
-                </form>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" id="homeLink" href="/welcome">Home</a>
             </li>
@@ -48,11 +45,16 @@
             <li class="nav-item">
                 <a class="nav-link" id="suggestedLink" href="/suggestPlace">Suggest Place</a>
             </li>
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0"  action="${pageContext.request.contextPath}/search" method="GET">
+                    <input class="form-control mr-sm-2" name = "search" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </li>
             <% if (session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) { %>
             <li class="nav-item dropdown">
                 <button class="btn btn-link dropdown-toggle" type="button" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!-- User Profile Icon Image -->
-                    <img src="${pageContext.request.contextPath}/images/${sessionScope.image}" alt="User Profile" width="25" height="25">
+                    <img src="${pageContext.request.contextPath}/images/${sessionScope.image}" alt="${pageContext.request.contextPath}/images/" width="25" height="25">
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#"  id="userProfileBtn"  data-toggle="modal" data-target="#userProfileModal">${sessionScope.username}</a>
