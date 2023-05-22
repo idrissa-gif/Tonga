@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#placesTable {
+    width: 80%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#placesTable th,
+#placesTable td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.image1,
+.image2,
+.image3 {
+    object-fit: cover;
+}

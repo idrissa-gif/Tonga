@@ -10,7 +10,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="../includes/sidebar.jsp"/>
 </div>
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 100px">
     <h1 class="text-center mb-4">Add Operator</h1>
     <h3 style="text-align: center"><strong>${message}</strong></h3>
     <form action="/saveOperator" method="get">

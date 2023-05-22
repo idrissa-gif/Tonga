@@ -13,7 +13,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="../includes/sidebar.jsp"/>
 </div>
-<div class="container">
+<div class="container" style="margin-bottom: 100px">
     <h1>Edit Operator</h1>
     <form method="get" action="/UpdateOperator">
         <div class="form-group">

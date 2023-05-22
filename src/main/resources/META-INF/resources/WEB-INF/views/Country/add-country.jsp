@@ -12,7 +12,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="../includes/sidebar.jsp"/>
 </div>
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 100px">
     <h1 class="mb-4" style="text-align: center">Add Country</h1>
     <h3 style="text-align: center"><strong>${message}</strong></h3>
     <form action="addCountry" method="get">

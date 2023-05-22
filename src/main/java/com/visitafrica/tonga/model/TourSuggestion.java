@@ -11,6 +11,8 @@ public class TourSuggestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    private String userEmail;
     @Column(name = "tour_title")
     private String title;
     @Column(name = "prices")
@@ -140,5 +142,13 @@ public class TourSuggestion {
 
     public void setCreationDate(Date creationDate) {
         CreationDate = creationDate;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

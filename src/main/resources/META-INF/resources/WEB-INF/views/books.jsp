@@ -14,7 +14,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="includes/sidebar.jsp"/>
 </div>
-<div class="container">
+<div class="container" style="margin-bottom: 100px">
     <h1>List of Books</h1>
     <table class="table table-striped">
         <thead>

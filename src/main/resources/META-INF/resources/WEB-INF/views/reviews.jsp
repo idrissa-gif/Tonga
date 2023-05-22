@@ -27,7 +27,7 @@
 <div style="margin-bottom: 5%;">
     <jsp:include page="includes/sidebar.jsp"/>
 </div>
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 100px">
     <h1>Reviews</h1>
     <table class="table mt-4">
         <thead>

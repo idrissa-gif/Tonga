@@ -52,7 +52,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/books">Book</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/suggestedPlaces">Suggested Places</a>
+                    </li>
                     <li class="nav-item text-center" style="padding-top:300px">
                         <a class="btn btn-primary" aria-current="page" href="/logout">Log Out</a>
                     </li>

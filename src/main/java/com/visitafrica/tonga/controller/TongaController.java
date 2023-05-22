@@ -2,13 +2,17 @@ package com.visitafrica.tonga.controller;
 
 import com.visitafrica.tonga.model.*;
 import com.visitafrica.tonga.service.*;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +23,7 @@ import java.util.List;
 
 @Controller
 public class TongaController {
+    private static final String desiredRole = "admin";
 
     @Autowired
     private CountryService countryService;
@@ -33,26 +38,42 @@ public class TongaController {
     private ReviewService reviewService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private TourSuggestionService tourSuggestionService;
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "/login";
+    public String login() {
+        return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpServletRequest request) {
-        // Authenticate user and set session attribute
-        HttpSession session = request.getSession();
-        session.setAttribute("user", username);
-        return "/dashboard";
+    public String signin(Model model,
+                         HttpSession session,
+                         @RequestParam("email") String email,
+                         @RequestParam("password") String password) {
+        String role = "admin";
+        User user = userService.getbyEmail(email);
+        if (email.equals(user.getEmail()) && BCrypt.checkpw(password, user.getPassword()) && role.equals(user.getRole())) {
+            model.addAttribute("user_email", email);
+            List<Tour> tourList = tourService.findTours();
+            model.addAttribute("tourList", tourList);
+            session.setAttribute("username",user.getUsername());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("phone", user.getPhone());
+            session.setAttribute("full_name",user.getFullName());
+            session.setAttribute("address",user.getAddress());
+            session.setAttribute("image",user.getImage());
+            session.setAttribute("isLoggedIn", true); // add a flag to session
+            return "redirect:/welcome";
+        } else {
+            model.addAttribute("message", "Invalid email or password");
+            return "login";
+        }
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         // Invalidate session and redirect to login page
@@ -283,6 +304,19 @@ public class TongaController {
         return "books";
     }
 /**  END OF BOOK FUNCTIONS**/
+
+/** START OF SUGGEST PLACES FUNCTIONS**/
+@GetMapping("/suggestedPlaces")
+    public String displaySuggestedPlaces(Model model) {
+        List<TourSuggestion> suggestedPlaces = tourSuggestionService.getSuggestedPlaces();
+        model.addAttribute("suggestedPlaces", suggestedPlaces);
+
+        return "suggestedPlaces";
+    }
+/** END OF SUGGEST PLACES FUNCTIONS**/
+
+
+
 
 //@ExceptionHandler(Exception.class)
 //public String handleException(Exception ex, HttpServletRequest request) {

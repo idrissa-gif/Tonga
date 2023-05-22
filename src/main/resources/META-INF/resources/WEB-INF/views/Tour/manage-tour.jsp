@@ -22,7 +22,7 @@
     <jsp:include page="../includes/sidebar.jsp"/>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5"  style="margin-bottom: 100px">
     <h1 class="text-center">Tours List</h1>
     <table class="table table-hover mt-3">
         <thead>

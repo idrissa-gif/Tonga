@@ -74,12 +74,12 @@
     <form method="POST" th:th:action="@{/login}" class="form-signin">
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
+            <input name="email" type="text" class="form-control" placeholder="Username"
                    autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span><br>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <a href="#" class="forgot-password-link">Forgot Password?</a>
+            <a href="/forgetPassword" class="forgot-password-link">Forgot Password?</a>
             <br>
             <button class="btn btn-lg btn-primary login-btn" type="submit">Log In</button>
 
