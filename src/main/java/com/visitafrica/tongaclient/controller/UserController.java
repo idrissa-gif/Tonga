@@ -63,7 +63,10 @@ public class UserController {
                          @RequestParam("email") String email,
                          @RequestParam("password") String password) {
         User user = userService.getbyEmail(email);
-        if (email.equals(user.getEmail()) && BCrypt.checkpw(password, user.getPassword())) {
+        if (user == null) {
+            user = userService.getbyUsername(email);
+        }
+        if ( (email.equals(user.getEmail()) || email.equals(user.getUsername())) && BCrypt.checkpw(password, user.getPassword())) {
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
