@@ -56,7 +56,11 @@ public class TongaController {
                          @RequestParam("password") String password) {
         String role = "admin";
         User user = userService.getbyEmail(email);
-        if (email.equals(user.getEmail()) && BCrypt.checkpw(password, user.getPassword()) && role.equals(user.getRole())) {
+        if (user == null) {
+            user = userService.getbyUsername(email);
+        }
+        System.out.println(email +" ad "+ password);
+        if ((email.equals(user.getEmail()) || email.equals(user.getUsername())) && BCrypt.checkpw(password, user.getPassword()) && role.equals(user.getRole())) {
             model.addAttribute("user_email", email);
             List<Tour> tourList = tourService.findTours();
             model.addAttribute("tourList", tourList);
